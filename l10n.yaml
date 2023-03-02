@@ -1,5 +1,5 @@
 synthetic-package: false
-arb-dir: lib/resources/strings/l10n
+arb-dir: lib/core/languages/l10n
 template-arb-file: app_ko.arb
-output-dir: lib/resources/strings
+output-dir: lib/core/languages/
 output-localization-file: app_localizations.dart

@@ -1,16 +1,11 @@
-import 'package:alcohol_free/resources/strings/app_localizations.dart';
+import 'package:alcohol_free/core/languages/app_localizations.dart';
+import 'package:alcohol_free/core/utils/app_initializations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-
+  await initializeFirebase();
   runApp(const MyApp());
 }
 
