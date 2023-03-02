@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "933078773099",
+    "project_id": "alcohol-free-83cab",
+    "storage_bucket": "alcohol-free-83cab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:933078773099:android:11fbab30db5999fc98f02e",
+        "android_client_info": {
+          "package_name": "com.gdsc.alcohol_free"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "933078773099-11v8qutmrl21fgncb125djff6hqf79ef.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsp8BdCWsNtyLyiW3Q1pX1kZYICZuqUL4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "933078773099-11v8qutmrl21fgncb125djff6hqf79ef.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

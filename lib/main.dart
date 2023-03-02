@@ -1,8 +1,11 @@
-import 'package:alcohol_free/resources/strings/app_localizations.dart';
+import 'package:alcohol_free/core/languages/app_localizations.dart';
+import 'package:alcohol_free/core/utils/app_initializations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initializeFirebase();
   runApp(const MyApp());
 }
 
