@@ -1,12 +1,33 @@
 import 'dart:developer';
-
 import 'package:alcohol_free/app/data/models/alcohol_free_user.dart';
 import 'package:alcohol_free/core/values/strings.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthProvider extends GetxService {
   static AuthProvider get to => Get.find<AuthProvider>();
+
+  Future<AlcoholFreeUser?> signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser!.authentication;
+
+      final OAuthCredential oAuthCredential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      UserCredential credential =
+          await FirebaseAuth.instance.signInWithCredential(oAuthCredential);
+
+      return AlcoholFreeUser.fromUserCredential(credential);
+    } catch (e) {
+      log("ERROR(AuthProvider.signInWithGoogle): ${e.toString()}");
+      return null;
+    }
+  }
 
   Future<AlcoholFreeUser?> signInWithEmailAndPassword(
       String email, String password) async {
@@ -29,8 +50,7 @@ class AuthProvider extends GetxService {
     }
   }
 
-  Future<AlcoholFreeUser?> createAccount(
-      String email, String password) async {
+  Future<AlcoholFreeUser?> createAccount(String email, String password) async {
     try {
       UserCredential credential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
