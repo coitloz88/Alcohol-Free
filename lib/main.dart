@@ -1,3 +1,4 @@
+import 'package:alcohol_free/app/data/providers/auth_provider.dart';
 import 'package:alcohol_free/core/languages/app_localizations.dart';
 import 'package:alcohol_free/core/utils/app_initializations.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +6,11 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await initializeFirebase();
+  await initializeProviders();
+  await initializeServices();
+
   runApp(const MyApp());
 }
 
