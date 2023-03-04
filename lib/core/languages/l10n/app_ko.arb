@@ -1,3 +1,8 @@
 {
-  "title": "알콜 프리"
+  "title": "알콜 프리",
+  "promise": "약속",
+  "diary": "일지",
+  "home": "홈",
+  "community": "커뮤니티",
+  "my": "마이"
 }
