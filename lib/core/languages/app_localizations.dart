@@ -96,6 +96,36 @@ abstract class AppLocalizations {
   /// In ko, this message translates to:
   /// **'알콜 프리'**
   String get title;
+
+  /// No description provided for @promise.
+  ///
+  /// In ko, this message translates to:
+  /// **'약속'**
+  String get promise;
+
+  /// No description provided for @diary.
+  ///
+  /// In ko, this message translates to:
+  /// **'일지'**
+  String get diary;
+
+  /// No description provided for @home.
+  ///
+  /// In ko, this message translates to:
+  /// **'홈'**
+  String get home;
+
+  /// No description provided for @community.
+  ///
+  /// In ko, this message translates to:
+  /// **'커뮤니티'**
+  String get community;
+
+  /// No description provided for @my.
+  ///
+  /// In ko, this message translates to:
+  /// **'마이'**
+  String get my;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
