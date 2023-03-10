@@ -5,8 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class AuthProvider extends GetxService {
-  static AuthProvider get to => Get.find<AuthProvider>();
+class FirebaseAuthProvider extends GetxService {
+  static FirebaseAuthProvider get to => Get.find<FirebaseAuthProvider>();
 
   Future<AlcoholFreeUser?> signInWithGoogle() async {
     try {
@@ -25,8 +25,8 @@ class AuthProvider extends GetxService {
       return AlcoholFreeUser.fromUserCredential(credential);
     } catch (e) {
       log("ERROR(AuthProvider.signInWithGoogle): ${e.toString()}");
-      return null;
     }
+    return null;
   }
 
   Future<AlcoholFreeUser?> signInWithEmailAndPassword(
@@ -43,11 +43,10 @@ class AuthProvider extends GetxService {
       } else if (e.code == AuthError.WRONG_PASSWORD) {
         rethrow;
       }
-      return null;
     } catch (e) {
       log("ERROR(AuthProvider.signInWithEmailAndPassword): ${e.toString()}");
-      return null;
     }
+    return null;
   }
 
   Future<AlcoholFreeUser?> createAccount(String email, String password) async {
@@ -61,10 +60,9 @@ class AuthProvider extends GetxService {
       } else if (e.code == AuthError.WEAK_PASSWORD) {
         rethrow;
       }
-      return null;
     } catch (e) {
       log("ERROR(AuthService.createAccount): ${e.toString()}");
-      return null;
     }
+    return null;
   }
 }

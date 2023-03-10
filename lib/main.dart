@@ -1,4 +1,4 @@
-import 'package:alcohol_free/app/data/providers/auth_provider.dart';
+import 'package:alcohol_free/app/data/providers/firebase_auth_provider.dart';
 import 'package:alcohol_free/core/languages/app_localizations.dart';
 import 'package:alcohol_free/core/utils/app_initializations.dart';
 import 'package:flutter/material.dart';
