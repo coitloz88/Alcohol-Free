@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Alcohol Free',
         localizationsDelegates: const [
           AppLocalizations.delegate,
@@ -35,26 +36,33 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(primaryColor: Colors.white),
         home: Scaffold(
           appBar: AppBar(
-              toolbarHeight: 32.0,
+              toolbarHeight: 40.0,
               backgroundColor: Colors.transparent,
               elevation: 0.0,
               title: Image.asset('images/logos/logo_app_bar.png',
                   height: 13, fit: BoxFit.fill),
               actions: <Widget>[
                 IconButton(
-                  iconSize: 16,
+                  iconSize: 24,
                   icon: const Icon(CupertinoIcons.bell,
-                      size: 16.0, color: Colors.black),
+                      size: 24.0, color: Colors.black),
                   onPressed: () {},
                 ),
               ]),
-          body: BottomNavigator(),
+          body: const BottomNavigator(),
         ));
   }
 }
 
-class BottomNavigator extends StatelessWidget {
-  BottomNavigator({super.key});
+class BottomNavigator extends StatefulWidget {
+  const BottomNavigator({Key? key}) : super(key: key);
+
+  @override
+  State<BottomNavigator> createState() => _BottomNavigatorState();
+}
+
+class _BottomNavigatorState extends State<BottomNavigator> {
+  int _selectedIndex = 2;
 
   final List<Widget> _widgetOptions = [
     const Text('약속 화면'),
@@ -62,48 +70,56 @@ class BottomNavigator extends StatelessWidget {
     const Text('홈 화면'),
     const Text('커뮤니티 화면'),
     const Text('마이 화면'),
+    //promisePage(), ... 등으로 .dart 파일 import 후 추가하면 됨
   ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      initialIndex: 2,
-      length: 5,
-      child: Scaffold(
-        bottomNavigationBar: Container(
-          decoration: const BoxDecoration(
-              color: Colors.white,
-              border: Border(
-                  top: BorderSide(color: Color(0xffE2E2E2), width: 1.0))),
-          child: const TabBar(
-            tabs: <Widget>[
-              Tab(
-                  icon: Icon(CupertinoIcons.rosette,
-                      color: Colors.black, size: 24.0)),
-              Tab(
-                  icon: Icon(CupertinoIcons.calendar,
-                      color: Colors.black, size: 24.0)),
-              Tab(
-                  icon: Icon(CupertinoIcons.home,
-                      color: Colors.black, size: 24.0)),
-              Tab(
-                  icon: Icon(CupertinoIcons.personalhotspot,
-                      color: Colors.black, size: 24.0)),
-              Tab(
-                  icon: Icon(CupertinoIcons.person,
-                      color: Colors.black, size: 24.0))
-            ],
-            indicatorColor: Colors.transparent,
-            unselectedLabelStyle: TextStyle(
-                color: Color(0xffE2E2E2), fontWeight: FontWeight.normal),
-            labelStyle:
-                TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-          ),
+    return Scaffold(
+        body: SafeArea(
+          child: _widgetOptions.elementAt(_selectedIndex),
         ),
-        body: TabBarView(
-          children: _widgetOptions,
-        ),
-      ),
-    );
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+                icon: const Icon(CupertinoIcons.rosette, size: 24.0),
+                label: AppLocalizations.of(context)!.promise),
+            BottomNavigationBarItem(
+                icon: const Icon(CupertinoIcons.calendar, size: 24.0),
+                label: AppLocalizations.of(context)!.diary),
+            BottomNavigationBarItem(
+                icon: const Icon(CupertinoIcons.home, size: 24.0),
+                label: AppLocalizations.of(context)!.home),
+            BottomNavigationBarItem(
+                icon: const Icon(CupertinoIcons.personalhotspot, size: 24.0),
+                label: AppLocalizations.of(context)!.community),
+            BottomNavigationBarItem(
+                icon: const Icon(CupertinoIcons.person, size: 24.0),
+                label: AppLocalizations.of(context)!.my)
+          ],
+          currentIndex: _selectedIndex,
+          unselectedItemColor: Colors.grey,
+          selectedItemColor: Colors.black,
+          onTap: _onItemTapped,
+        ));
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }
