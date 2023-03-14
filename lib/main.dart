@@ -1,8 +1,9 @@
-import 'package:alcohol_free/app/data/providers/firebase_auth_provider.dart';
 import 'package:alcohol_free/core/languages/app_localizations.dart';
 import 'package:alcohol_free/core/utils/app_initializations.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:cupertino_icons/cupertino_icons.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,9 +42,9 @@ class MyApp extends StatelessWidget {
                   height: 13, fit: BoxFit.fill),
               actions: <Widget>[
                 IconButton(
-                  icon: Image.asset(
-                    'images/icons/icon_notification.png',
-                  ),
+                  iconSize: 16,
+                  icon: const Icon(CupertinoIcons.bell,
+                      size: 16.0, color: Colors.black),
                   onPressed: () {},
                 ),
               ]),
@@ -74,19 +75,29 @@ class BottomNavigator extends StatelessWidget {
               color: Colors.white,
               border: Border(
                   top: BorderSide(color: Color(0xffE2E2E2), width: 1.0))),
-          child: TabBar(
+          child: const TabBar(
             tabs: <Widget>[
-              Tab(icon: Text(AppLocalizations.of(context)!.promise)),
-              Tab(icon: Text(AppLocalizations.of(context)!.diary)),
-              Tab(icon: Text(AppLocalizations.of(context)!.home)),
-              Tab(icon: Text(AppLocalizations.of(context)!.community)),
-              Tab(icon: Text(AppLocalizations.of(context)!.my))
+              Tab(
+                  icon: Icon(CupertinoIcons.rosette,
+                      color: Colors.black, size: 24.0)),
+              Tab(
+                  icon: Icon(CupertinoIcons.calendar,
+                      color: Colors.black, size: 24.0)),
+              Tab(
+                  icon: Icon(CupertinoIcons.home,
+                      color: Colors.black, size: 24.0)),
+              Tab(
+                  icon: Icon(CupertinoIcons.personalhotspot,
+                      color: Colors.black, size: 24.0)),
+              Tab(
+                  icon: Icon(CupertinoIcons.person,
+                      color: Colors.black, size: 24.0))
             ],
             indicatorColor: Colors.transparent,
-            unselectedLabelStyle: const TextStyle(
+            unselectedLabelStyle: TextStyle(
                 color: Color(0xffE2E2E2), fontWeight: FontWeight.normal),
-            labelStyle: const TextStyle(
-                color: Colors.black, fontWeight: FontWeight.bold),
+            labelStyle:
+                TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
           ),
         ),
         body: TabBarView(
