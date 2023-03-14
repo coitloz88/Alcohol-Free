@@ -1,0 +1,4 @@
+enum LevelOfAccess {
+  public,
+  private
+}
