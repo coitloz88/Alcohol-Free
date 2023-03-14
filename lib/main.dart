@@ -34,12 +34,19 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(primaryColor: Colors.white),
         home: Scaffold(
           appBar: AppBar(
-            title: Image.asset('images/logos/logo_app_bar.png',
-                height: 13, fit: BoxFit.fill),
-            toolbarHeight: 32.0,
-            backgroundColor: Colors.transparent,
-            elevation: 0.0,
-          ),
+              toolbarHeight: 32.0,
+              backgroundColor: Colors.transparent,
+              elevation: 0.0,
+              title: Image.asset('images/logos/logo_app_bar.png',
+                  height: 13, fit: BoxFit.fill),
+              actions: <Widget>[
+                IconButton(
+                  icon: Image.asset(
+                    'images/icons/icon_notification.png',
+                  ),
+                  onPressed: () {},
+                ),
+              ]),
           body: BottomNavigator(),
         ));
   }
