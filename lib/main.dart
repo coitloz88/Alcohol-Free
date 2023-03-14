@@ -21,19 +21,27 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Alcohol Free',
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: const [
-        Locale('ko'), //Korean
-      ],
-      theme: ThemeData(primaryColor: Colors.white),
-      home: BottomNavigator(),
-    );
+        title: 'Alcohol Free',
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: const [
+          Locale('ko'), //Korean
+        ],
+        theme: ThemeData(primaryColor: Colors.white),
+        home: Scaffold(
+          appBar: AppBar(
+            title: Image.asset('images/logos/logo_app_bar.png',
+                height: 13, fit: BoxFit.fill),
+            toolbarHeight: 32.0,
+            backgroundColor: Colors.transparent,
+            elevation: 0.0,
+          ),
+          body: BottomNavigator(),
+        ));
   }
 }
 
