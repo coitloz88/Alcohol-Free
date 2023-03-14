@@ -1,4 +1,4 @@
-import 'package:alcohol_free/app/data/providers/auth_provider.dart';
+import 'package:alcohol_free/app/data/providers/firebase_auth_provider.dart';
 import 'package:alcohol_free/app/data/services/notification_service/notification_service.dart';
 import 'package:alcohol_free/app/data/services/auth_service/auth_service.dart';
 import 'package:alcohol_free/core/values/firebase_options.dart';
