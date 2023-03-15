@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
               toolbarHeight: 40.0,
               backgroundColor: Colors.transparent,
               elevation: 0.0,
-              title: Image.asset('images/logos/logo_app_bar.png',
+              title: Image.asset('assets/images/logo_app_bar.png',
                   height: 13, fit: BoxFit.fill),
               actions: <Widget>[
                 IconButton(
