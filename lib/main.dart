@@ -5,6 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:cupertino_icons/cupertino_icons.dart';
+import 'package:get/get.dart';
+import 'package:alcohol_free/main_view_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -63,8 +65,6 @@ class BottomNavigator extends StatefulWidget {
 }
 
 class _BottomNavigatorState extends State<BottomNavigator> {
-  int _selectedIndex = 2;
-
   final List<Widget> _widgetOptions = [
     const Text('약속 화면'),
     const Text('일지 화면'),
@@ -74,44 +74,44 @@ class _BottomNavigatorState extends State<BottomNavigator> {
     //promisePage(), ... 등으로 .dart 파일 import 후 추가하면 됨
   ];
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: SafeArea(
-          child: _widgetOptions.elementAt(_selectedIndex),
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-                icon: const Icon(CupertinoIcons.rosette, size: 24.0),
-                label: AppLocalizations.of(context)!.promise),
-            BottomNavigationBarItem(
-                icon: const Icon(CupertinoIcons.calendar, size: 24.0),
-                label: AppLocalizations.of(context)!.diary),
-            BottomNavigationBarItem(
-                icon: const Icon(CupertinoIcons.home, size: 24.0),
-                label: AppLocalizations.of(context)!.home),
-            BottomNavigationBarItem(
-                icon: const Icon(CupertinoIcons.personalhotspot, size: 24.0),
-                label: AppLocalizations.of(context)!.community),
-            BottomNavigationBarItem(
-                icon: const Icon(CupertinoIcons.person, size: 24.0),
-                label: AppLocalizations.of(context)!.my)
-          ],
-          currentIndex: _selectedIndex,
-          unselectedItemColor: Colors.grey,
-          selectedItemColor: Colors.black,
-          onTap: _onItemTapped,
-        ));
+    return GetBuilder<MainViewController>(
+      init: MainViewController(),
+      builder: (controller) {
+        return Scaffold(
+            body: SafeArea(
+              child: _widgetOptions.elementAt(controller.selectedIndex),
+            ),
+            bottomNavigationBar: BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
+              showSelectedLabels: false,
+              showUnselectedLabels: false,
+              items: <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                    icon: const Icon(CupertinoIcons.rosette, size: 24.0),
+                    label: AppLocalizations.of(context)!.promise),
+                BottomNavigationBarItem(
+                    icon: const Icon(CupertinoIcons.calendar, size: 24.0),
+                    label: AppLocalizations.of(context)!.diary),
+                BottomNavigationBarItem(
+                    icon: const Icon(CupertinoIcons.home, size: 24.0),
+                    label: AppLocalizations.of(context)!.home),
+                BottomNavigationBarItem(
+                    icon:
+                        const Icon(CupertinoIcons.personalhotspot, size: 24.0),
+                    label: AppLocalizations.of(context)!.community),
+                BottomNavigationBarItem(
+                    icon: const Icon(CupertinoIcons.person, size: 24.0),
+                    label: AppLocalizations.of(context)!.my)
+              ],
+              currentIndex: controller.selectedIndex,
+              unselectedItemColor: Colors.grey,
+              selectedItemColor: Colors.black,
+              onTap: controller.updateBottomTabToTapped,
+            ));
+      },
+    );
   }
 
   @override
