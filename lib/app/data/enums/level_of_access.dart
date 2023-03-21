@@ -1,4 +1,7 @@
 enum LevelOfAccess {
-  public,
-  private
+  public('public'),
+  private('private');
+
+  const LevelOfAccess(this.name);
+  final String name;
 }

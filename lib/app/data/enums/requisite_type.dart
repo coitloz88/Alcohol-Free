@@ -1,0 +1,4 @@
+enum RequisiteType {
+  consumptionBased,
+  dayBased
+}
