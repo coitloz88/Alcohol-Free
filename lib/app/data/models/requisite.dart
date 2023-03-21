@@ -4,7 +4,7 @@ import 'package:alcohol_free/app/data/models/day_based_requisite.dart';
 
 abstract class Requisite {
   factory Requisite.fromJson(json) {
-    switch(json['type'] as RequisiteType) {
+    switch(RequisiteType.fromIndex(json['type'])) {
       case RequisiteType.consumptionBased:
         return ConsumptionBased();
       case RequisiteType.dayBased:

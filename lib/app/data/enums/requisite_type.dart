@@ -1,4 +1,8 @@
 enum RequisiteType {
   consumptionBased,
-  dayBased
+  dayBased;
+
+  factory RequisiteType.fromIndex(int idx) {
+    return values.firstWhere((element) => element.index == idx);
+  }
 }

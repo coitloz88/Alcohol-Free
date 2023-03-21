@@ -5,7 +5,7 @@ class ConsumptionBased implements Requisite {
   @override
   Map<String, dynamic> toJson() {
     return <String, dynamic> {
-      'type':RequisiteType.consumptionBased.name,
+      'type':RequisiteType.consumptionBased.index,
     };
   }
   // int consumption;

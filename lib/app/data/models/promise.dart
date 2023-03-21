@@ -26,7 +26,7 @@ class Promise {
         (json['from'] as Timestamp).toDate(),
         (json['to'] as Timestamp).toDate(),
         Requisite.fromJson(json['requisite']),
-        json['levelOfAccess'] as LevelOfAccess,
+        LevelOfAccess.fromIndex(json['levelOfAccess'] as int),
         json['memo'] as String,
         friends);
 
@@ -41,7 +41,7 @@ class Promise {
       'from': from,
       'to': to,
       'requisite': requisite.toJson(),
-      'levelOfAccess': levelOfAccess.name,
+      'levelOfAccess': levelOfAccess.index,
       'memo': memo,
       'friends': friendsJson.toList(),
     };

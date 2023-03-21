@@ -5,7 +5,7 @@ class DayBased implements Requisite {
   @override
   Map<String, dynamic> toJson() {
     return <String, dynamic> {
-      'type':RequisiteType.dayBased.name,
+      'type':RequisiteType.dayBased.index,
     };
   }
   // int days;

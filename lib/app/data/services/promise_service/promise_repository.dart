@@ -6,14 +6,18 @@ class PromiseRepository {
   final FirestoreProvider _dbProvider = FirestoreProvider.to;
 
   Future<String> createPromise(Promise promise) async {
-    DocumentReference promiseDocRef = await _dbProvider.createPromise(promise.toJson());
+    DocumentReference promiseDocRef =
+        await _dbProvider.createPromise(promise.toJson());
     return promiseDocRef.id;
   }
 
-  // Future <List<Promise>> readPromiseList() async {
-  //   List<Map<String, dynamic>> promiseJsonList = await _dbProvider.readPromiseList();
-  //   List<Promise> promiseList = promiseJsonList.map((promiseJson) => Promise.fromJson(promiseJson));
-  //
-  //   return promiseList;
-  // }
+  Future<List<Promise>> readPromiseList() async {
+    List<Map<String, dynamic>> promiseJsonList =
+        await _dbProvider.readPromiseList();
+    List<Promise> promiseList = promiseJsonList
+        .map((promiseJson) => Promise.fromJson(promiseJson))
+        .toList();
+
+    return promiseList;
+  }
 }

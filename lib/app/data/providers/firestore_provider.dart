@@ -17,7 +17,20 @@ class FirestoreProvider extends GetxService {
     return promiseCollection.add(json);
   }
 
-  // Future<List<Map<String, dynamic>>> readPromiseList() {
-  //
-  // }
+  Future<List<Map<String, dynamic>>> readPromiseList() async {
+    String uid = FirebaseAuth.instance.currentUser!.uid;
+
+    CollectionReference promiseCollection =
+      _userCollection.doc(uid).collection('promises');
+
+    QuerySnapshot? snapshot = await promiseCollection.get();
+
+    var promiseJsonList = snapshot.docs.map((promise) {
+      var json = promise.data() as Map<String, dynamic>;
+      json['pid'] = promise.id;
+      return json;
+    }).toList();
+
+    return promiseJsonList;
+  }
 }
