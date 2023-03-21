@@ -126,6 +126,18 @@ abstract class AppLocalizations {
   /// In ko, this message translates to:
   /// **'마이'**
   String get my;
+
+  /// No description provided for @myPromises.
+  ///
+  /// In ko, this message translates to:
+  /// **'나의 약속'**
+  String get myPromises;
+
+  /// No description provided for @otherPromises.
+  ///
+  /// In ko, this message translates to:
+  /// **'지켜봐주는 약속'**
+  String get otherPromises;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

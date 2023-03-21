@@ -4,5 +4,7 @@
   "diary": "일지",
   "home": "홈",
   "community": "커뮤니티",
-  "my": "마이"
+  "my": "마이",
+  "myPromises": "나의 약속",
+  "otherPromises": "지켜봐주는 약속"
 }

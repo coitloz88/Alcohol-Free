@@ -21,4 +21,10 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get my => '마이';
+
+  @override
+  String get myPromises => '나의 약속';
+
+  @override
+  String get otherPromises => '지켜봐주는 약속';
 }
