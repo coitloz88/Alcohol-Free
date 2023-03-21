@@ -21,7 +21,6 @@ class FirebaseAuthProvider extends GetxService {
 
       UserCredential credential =
           await FirebaseAuth.instance.signInWithCredential(oAuthCredential);
-
       return AlcoholFreeUser.fromUserCredential(credential);
     } catch (e) {
       log("ERROR(AuthProvider.signInWithGoogle): ${e.toString()}");

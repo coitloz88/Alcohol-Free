@@ -1,4 +1,8 @@
 enum LevelOfAccess {
   public,
-  private
+  private;
+
+  factory LevelOfAccess.fromIndex(int idx) {
+    return values.firstWhere((element) => element.index == idx);
+  }
 }
