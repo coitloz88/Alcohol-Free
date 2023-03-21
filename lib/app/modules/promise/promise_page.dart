@@ -1,15 +1,13 @@
 import 'package:alcohol_free/app/data/models/progress_list_item_data.dart';
 import 'package:alcohol_free/app/modules/promise/local_widgets/progress_list_item.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:alcohol_free/app/modules/promise/local_widgets/promise_view.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:alcohol_free/app/modules/promise/local_widgets/promise_sort.dart';
 
 class PromiseView extends StatelessWidget {
-  // final List<PromiseProgressItem> entries =
-  //     List.generate(samplePromises.length, (index) => samplePromises[index]);
-
   const PromiseView({Key? key}) : super(key: key);
 
   @override
@@ -53,12 +51,29 @@ class _PromiseTabState extends State<PromiseTab> {
                   ),
                   Expanded(
                       child: TabBarView(
-                    children: [Text('1'), Text('2')],
+                    children: [PromiseTabView(), PromiseTabView()],
                   )),
                 ],
               ),
             ),
           )
         ]);
+  }
+}
+
+class PromiseTabView extends StatelessWidget {
+  const PromiseTabView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisSize: MainAxisSize.max,
+      children: const [
+        PromiseSortContainer(),
+        PromiseStatusView(),
+        PromiseStatusView()
+      ],
+    );
   }
 }
