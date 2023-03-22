@@ -1,8 +1,8 @@
 import 'package:alcohol_free/app/modules/promise/local_widgets/progress_list_item.dart';
 import 'package:flutter/material.dart';
 
-class PromiseStatusView extends StatelessWidget {
-  const PromiseStatusView({Key? key}) : super(key: key);
+class PromiseListView extends StatelessWidget {
+  const PromiseListView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

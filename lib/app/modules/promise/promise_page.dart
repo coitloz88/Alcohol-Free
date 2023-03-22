@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
-import 'package:alcohol_free/app/modules/promise/local_widgets/promise_sort.dart';
+import 'package:alcohol_free/app/modules/promise/local_widgets/promise_sort_option.dart';
 
-class PromiseView extends StatelessWidget {
-  const PromiseView({Key? key}) : super(key: key);
+class PromisePageView extends StatelessWidget {
+  const PromisePageView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -70,9 +70,9 @@ class PromiseTabView extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       mainAxisSize: MainAxisSize.max,
       children: const [
-        PromiseSortContainer(),
-        PromiseStatusView(),
-        PromiseStatusView()
+        PromiseSortOptionContainer(),
+        PromiseListView(),
+        PromiseListView()
       ],
     );
   }

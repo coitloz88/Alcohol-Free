@@ -66,7 +66,7 @@ class BottomNavigator extends StatefulWidget {
 
 class _BottomNavigatorState extends State<BottomNavigator> {
   final List<Widget> _widgetOptions = [
-    PromiseView(),
+    PromisePageView(),
     const Text('일지 화면'),
     const Text('홈 화면'),
     const Text('커뮤니티 화면'),

@@ -89,7 +89,7 @@ class ProgressListItemView extends StatelessWidget {
                       width: 44,
                       height: 44,
                       clipBehavior: Clip.antiAlias,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                       ),
                       child: Image.network(
@@ -101,7 +101,7 @@ class ProgressListItemView extends StatelessWidget {
                       width: 44,
                       height: 44,
                       clipBehavior: Clip.antiAlias,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                       ),
                       child: Image.asset(

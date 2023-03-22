@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class PromiseSortContainer extends StatelessWidget {
-  const PromiseSortContainer({Key? key}) : super(key: key);
+class PromiseSortOptionContainer extends StatelessWidget {
+  const PromiseSortOptionContainer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
