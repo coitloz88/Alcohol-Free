@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
         supportedLocales: const [
           Locale('ko'), //Korean
         ],
-        theme: ThemeData(primaryColor: Colors.white),
+        theme: ThemeData(primaryColor: Colors.white, fontFamily: 'SUIT'),
         home: Scaffold(
           appBar: AppBar(
               toolbarHeight: 40.0,
