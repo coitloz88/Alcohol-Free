@@ -1,19 +1,31 @@
+import 'dart:math';
+
 import 'package:alcohol_free/app/data/enums/journal_icon.dart';
+import 'package:alcohol_free/app/data/enums/journal_type.dart';
 import 'package:alcohol_free/app/data/enums/level_of_being_drunk.dart';
 import 'package:alcohol_free/app/data/models/alcohol.dart';
 import 'package:alcohol_free/app/data/models/journal.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-class DrinkingJournal extends Journal {
+class DrinkingJournal implements Journal {
+  @override
+  DateTime date;
+  @override
+  String description;
+  @override
+  JournalIcon icon;
+  @override
+  late String jid;
+
   String? why;
   String? where;
   List<String>? friends; // 프리셋 제공
   LevelOfBeingDrunk? levelOfBeingDrunk;
   DateTime? from, to;
   Alcohol? alcohol;
-  int? howmany;
+  int? howMany;
   String? hangoverMemo;
+  int? expense;
 
   // uint expense
   //Unit bottle/glass
@@ -21,18 +33,19 @@ class DrinkingJournal extends Journal {
   // expense와 bottle/glass 그리고 alcohol은 아직!!
 
   DrinkingJournal(
-    super.date,
-    super.icon,
-    super.description,
-    this.why,
-    this.where,
-    this.friends,
-    this.levelOfBeingDrunk,
-    this.from,
-    this.to,
-    this.alcohol,
-    this.hangoverMemo,
-  );
+      this.date,
+      this.icon,
+      this.description,
+      this.why,
+      this.where,
+      this.friends,
+      this.levelOfBeingDrunk,
+      this.from,
+      this.to,
+      this.alcohol,
+      this.howMany,
+      this.hangoverMemo,
+      this.expense);
 
   factory DrinkingJournal.fromJson(Map<String, dynamic> json) {
     // journal 종류 받기
@@ -47,13 +60,16 @@ class DrinkingJournal extends Journal {
       LevelOfBeingDrunk.fromIndex(json['levelOfBeingDrunk'] as int),
       (json['from'] as Timestamp).toDate(),
       (json['to'] as Timestamp).toDate(),
-      json['alcohol'] as Alcohol,
+      Alcohol.fromJson(json['alcohol']),
+      json['howMany'] as int,
       json['hangoverMemo'] as String,
+      json['expense'] as int,
     );
 
     return journal;
   }
 
+  @override
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
       'date': date,
@@ -65,8 +81,11 @@ class DrinkingJournal extends Journal {
       'levelOfBeingDrunk': levelOfBeingDrunk?.index,
       'from': from,
       'to': to,
-      'alcohol': alcohol,
-      'hangoverMemo': hangoverMemo
+      'howMany': howMany,
+      'alcohol': alcohol?.toJson(),
+      'hangoverMemo': hangoverMemo,
+      'expense': expense,
+      'type': JournalType.drinkingJournal.index,
     };
   }
 }

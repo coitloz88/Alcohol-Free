@@ -8,18 +8,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class JournalRepository {
   final FirestoreProvider _dbProvider = FirestoreProvider.to;
 
-  Future<String> createDrinkingJournal(DrinkingJournal drinkingJournal) async {
-    DocumentReference drinkingJournalDocRef =
-        await _dbProvider.createJournal(drinkingJournal.toJson());
-    return drinkingJournalDocRef.id;
+  // create Journal -> type 포함해서 create
+  Future<String> createJournal(Journal journal) async {
+    DocumentReference journalDocRef =
+        await _dbProvider.createJournal(journal.toJson());
+    return journalDocRef.id;
   }
 
-  Future<String> createSobrietyJournal(SobrietyJournal sobrietyJournal) async {
-    DocumentReference sobrietyJournalDocRef =
-        await _dbProvider.createJournal(sobrietyJournal.toJson());
-    return sobrietyJournalDocRef.id;
-  }
-
+  // read Journal -> 읽은 후 type으로 뭔지 판단
   Future<List<Journal>> readJournalList() async {
     List<Map<String, dynamic>> journalJsonList =
         await _dbProvider.readJournalList();

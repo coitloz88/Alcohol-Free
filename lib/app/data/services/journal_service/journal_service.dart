@@ -28,12 +28,28 @@ class JournalService extends GetxService {
     levelOfBeingDrunk,
     from,
     to,
+    howMany,
     alcohol,
     hangoverMemo,
+    expense,
   ) async {
-    DrinkingJournal journal = DrinkingJournal(date, icon, description, why,
-        where, friends, levelOfBeingDrunk, from, to, alcohol, hangoverMemo);
-    journal.jid = await _journalRepository.createDrinkingJournal(journal);
+    // 그럼 여기서 값을 받을 때 service 부분이요!
+
+    DrinkingJournal journal = DrinkingJournal(
+        date,
+        icon,
+        description,
+        why,
+        where,
+        friends,
+        levelOfBeingDrunk,
+        from,
+        to,
+        howMany,
+        alcohol,
+        hangoverMemo,
+        expense);
+    journal.jid = await _journalRepository.createJournal(journal);
     _journalList.add(journal);
     return journal;
   }
@@ -44,7 +60,7 @@ class JournalService extends GetxService {
     description,
   ) async {
     SobrietyJournal journal = SobrietyJournal(date, icon, description);
-    journal.jid = await _journalRepository.createSobrietyJournal(journal);
+    journal.jid = await _journalRepository.createJournal(journal);
     _journalList.add(journal);
     return journal;
   }

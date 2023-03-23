@@ -1,9 +1,10 @@
 import 'package:alcohol_free/app/data/enums/journal_icon.dart';
-import 'package:alcohol_free/app/data/models/alcohol.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
+import 'package:alcohol_free/app/data/enums/journal_type.dart';
+import 'package:alcohol_free/app/data/models/sobriety_journal.dart';
 
-class Journal {
+import 'drinking_journal.dart';
+
+abstract class Journal {
   DateTime date;
   JournalIcon icon;
   String description;
@@ -12,15 +13,16 @@ class Journal {
 
   Journal(this.date, this.icon, this.description);
 
+  // 만들 때
+  Map<String, dynamic> toJson();
+
+  // 가져올 때
   factory Journal.fromJson(Map<String, dynamic> json) {
-    // journal 종류 받기
-
-    Journal journal = Journal(
-      (json['date'] as Timestamp).toDate(),
-      json['icon'] as JournalIcon,
-      json['description'] as String,
-    );
-
-    return journal;
+    switch (JournalType.fromIndex(json['type'])) {
+      case JournalType.drinkingJournal:
+        return DrinkingJournal.fromJson(json);
+      case JournalType.sobrietyJournal:
+        return SobrietyJournal.fromJson(json);
+    }
   }
 }
