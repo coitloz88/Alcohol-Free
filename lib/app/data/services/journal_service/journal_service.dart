@@ -18,48 +18,14 @@ class JournalService extends GetxService {
     return this;
   }
 
-  Future<DrinkingJournal> createDrinkingJournal(
-    date,
-    icon,
-    description,
-    why,
-    where,
-    friends,
-    levelOfBeingDrunk,
-    from,
-    to,
-    howMany,
-    alcohol,
-    hangoverMemo,
-    expense,
-  ) async {
+  Future<DrinkingJournal> createDrinkingJournal(journal) async {
     // 그럼 여기서 값을 받을 때 service 부분이요!
-
-    DrinkingJournal journal = DrinkingJournal(
-        date,
-        icon,
-        description,
-        why,
-        where,
-        friends,
-        levelOfBeingDrunk,
-        from,
-        to,
-        howMany,
-        alcohol,
-        hangoverMemo,
-        expense);
     journal.jid = await _journalRepository.createJournal(journal);
     _journalList.add(journal);
     return journal;
   }
 
-  Future<SobrietyJournal> createSobrietyJournal(
-    date,
-    icon,
-    description,
-  ) async {
-    SobrietyJournal journal = SobrietyJournal(date, icon, description);
+  Future<SobrietyJournal> createSobrietyJournal(journal) async {
     journal.jid = await _journalRepository.createJournal(journal);
     _journalList.add(journal);
     return journal;

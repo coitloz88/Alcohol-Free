@@ -9,7 +9,7 @@ enum JournalIcon {
 
   final String iconPath;
 
-  factory JournalIcon.fromPath(int path) {
+  factory JournalIcon.fromPath(String path) {
     return values.firstWhere((element) => element.iconPath == path);
   }
 
