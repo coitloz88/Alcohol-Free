@@ -1,3 +1,4 @@
+import 'package:alcohol_free/app/data/models/alcohol_free_user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
@@ -71,5 +72,31 @@ class FirestoreProvider extends GetxService {
     if (json == null) throw Exception("user doesn't exist");
     json['uid'] = uid;
     return json;
+  }
+
+  Future<DocumentReference> createFriend(json) {
+    String uid = FirebaseAuth.instance.currentUser!.uid;
+
+    final CollectionReference friendsCollection =
+        _userCollection.doc(uid).collection('friends');
+
+    return friendsCollection.add(json);
+  }
+
+  Future<List<Map<String, dynamic>>> readFriendList() async {
+    String uid = FirebaseAuth.instance.currentUser!.uid;
+
+    CollectionReference friendsCollection =
+        _userCollection.doc(uid).collection('friends');
+
+    QuerySnapshot? snapshot = await friendsCollection.get();
+
+    var friendJsonList = snapshot.docs.map((friend) {
+      var json = friend.data() as Map<String, dynamic>;
+      json['uid'] = friend.id;
+      return json;
+    }).toList();
+
+    return friendJsonList;
   }
 }
