@@ -11,7 +11,9 @@ class PromiseService extends GetxService {
   List<Promise> get promiseList => _promiseList;
 
   Future<PromiseService> init() async {
-    _promiseList = await _promiseRepository.readPromiseList();
+    if(_promiseRepository.isLoggedIn()) {
+      _promiseList = await _promiseRepository.readPromiseList();
+    }
     return this;
   }
 
