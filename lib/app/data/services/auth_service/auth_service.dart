@@ -1,5 +1,6 @@
 import 'package:alcohol_free/app/data/models/alcohol_free_user.dart';
 import 'package:alcohol_free/app/data/services/auth_service/auth_repository.dart';
+import 'package:alcohol_free/app/data/services/user_service/user_service.dart';
 import 'package:get/get.dart';
 
 class AuthService extends GetxService {
@@ -8,7 +9,12 @@ class AuthService extends GetxService {
 
   Future<AlcoholFreeUser?> signInWithGoogle() async {
     try {
-      return _authRepository.signInWithGoogle();
+      AlcoholFreeUser? alcoholFreeUser =
+          await _authRepository.signInWithGoogle();
+      if (alcoholFreeUser != null) {
+        UserService.to.user = alcoholFreeUser;
+      }
+      return alcoholFreeUser;
     } catch (e) {
       rethrow;
     }
@@ -17,7 +23,12 @@ class AuthService extends GetxService {
   Future<AlcoholFreeUser?> signInWithEmailAndPassword(
       String email, String password) async {
     try {
-      return _authRepository.signInWithEmailAndPassword(email, password);
+      AlcoholFreeUser? alcoholFreeUser =
+          await _authRepository.signInWithEmailAndPassword(email, password);
+      if (alcoholFreeUser != null) {
+        UserService.to.user = alcoholFreeUser;
+      }
+      return alcoholFreeUser;
     } catch (e) {
       rethrow;
     }
@@ -25,7 +36,12 @@ class AuthService extends GetxService {
 
   Future<AlcoholFreeUser?> createAccount(String email, String password) async {
     try {
-      return _authRepository.createAccount(email, password);
+      AlcoholFreeUser? alcoholFreeUser =
+          await _authRepository.createAccount(email, password);
+      if (alcoholFreeUser != null) {
+        UserService.to.user = alcoholFreeUser;
+      }
+      return alcoholFreeUser;
     } catch (e) {
       rethrow;
     }
