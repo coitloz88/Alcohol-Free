@@ -1,4 +1,4 @@
-import 'dart:math';
+import 'dart:developer';
 
 import 'package:alcohol_free/app/data/enums/journal_icon.dart';
 import 'package:alcohol_free/app/data/enums/journal_type.dart';
@@ -49,14 +49,18 @@ class DrinkingJournal implements Journal {
 
   factory DrinkingJournal.fromJson(Map<String, dynamic> json) {
     // journal 종류 받기
+    List<String> friends =
+        (json['friends'] as List<dynamic>).map((e) => e.toString()).toList();
+
+    log(friends.toString());
 
     DrinkingJournal journal = DrinkingJournal(
       (json['date'] as Timestamp).toDate(),
-      json['icon'] as JournalIcon,
+      JournalIcon.fromPath(json['icon']),
       json['description'] as String,
       json['why'] as String,
       json['where'] as String,
-      json['friends'] as List<String>,
+      friends,
       LevelOfBeingDrunk.fromIndex(json['levelOfBeingDrunk'] as int),
       (json['from'] as Timestamp).toDate(),
       (json['to'] as Timestamp).toDate(),
@@ -73,7 +77,7 @@ class DrinkingJournal implements Journal {
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
       'date': date,
-      'icon': icon,
+      'icon': icon.toJson(),
       'description': description,
       'why': why,
       'where': where,
