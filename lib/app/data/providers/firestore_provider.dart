@@ -21,7 +21,7 @@ class FirestoreProvider extends GetxService {
     String uid = FirebaseAuth.instance.currentUser!.uid;
 
     CollectionReference promiseCollection =
-      _userCollection.doc(uid).collection('promises');
+        _userCollection.doc(uid).collection('promises');
 
     QuerySnapshot? snapshot = await promiseCollection.get();
 
@@ -32,5 +32,31 @@ class FirestoreProvider extends GetxService {
     }).toList();
 
     return promiseJsonList;
+  }
+
+  Future<List<Map<String, dynamic>>> readJournalList() async {
+    String uid = FirebaseAuth.instance.currentUser!.uid;
+
+    CollectionReference promiseCollection =
+        _userCollection.doc(uid).collection('journals');
+
+    QuerySnapshot? snapshot = await promiseCollection.get();
+
+    var promiseJsonList = snapshot.docs.map((promise) {
+      var json = promise.data() as Map<String, dynamic>;
+      json['pid'] = promise.id;
+      return json;
+    }).toList();
+
+    return promiseJsonList;
+  }
+
+  Future<DocumentReference> createJournal(json) {
+    String uid = FirebaseAuth.instance.currentUser!.uid;
+
+    final CollectionReference journalCollection =
+        _userCollection.doc(uid).collection('journals');
+
+    return journalCollection.add(json);
   }
 }
