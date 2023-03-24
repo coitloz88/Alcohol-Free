@@ -59,4 +59,17 @@ class FirestoreProvider extends GetxService {
 
     return journalCollection.add(json);
   }
+
+  Future<void> createUser(Map<String, dynamic> json) {
+    String uid = FirebaseAuth.instance.currentUser!.uid;
+    return _userCollection.doc(uid).set(json);
+  }
+
+  Future<Map<String, dynamic>> readUser(String uid) async {
+    DocumentSnapshot snapshot = await _userCollection.doc(uid).get();
+    var json = snapshot.data() as Map<String, dynamic>?;
+    if (json == null) throw Exception("user doesn't exist");
+    json['uid'] = uid;
+    return json;
+  }
 }

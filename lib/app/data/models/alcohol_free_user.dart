@@ -9,7 +9,7 @@ class AlcoholFreeUser {
   // TODO: 사진 field 추가
   AlcoholFreeUser.fromUserCredential(UserCredential credential)
       : uid = credential.user!.uid,
-        nickname = credential.user!.displayName!,
+        nickname = credential.user!.displayName ?? "닉네임",
         email = credential.user!.email!,
         selfDescription = "";
 

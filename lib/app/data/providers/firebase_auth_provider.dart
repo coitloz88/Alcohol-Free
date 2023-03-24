@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:alcohol_free/app/data/models/alcohol_free_user.dart';
+import 'package:alcohol_free/app/data/providers/firestore_provider.dart';
 import 'package:alcohol_free/core/values/strings.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
@@ -21,7 +22,7 @@ class FirebaseAuthProvider extends GetxService {
 
       UserCredential credential =
           await FirebaseAuth.instance.signInWithCredential(oAuthCredential);
-      return AlcoholFreeUser.fromUserCredential(credential);
+      return _getAlcoholFreeUser(credential);
     } catch (e) {
       log("ERROR(AuthProvider.signInWithGoogle): ${e.toString()}");
     }
@@ -33,7 +34,7 @@ class FirebaseAuthProvider extends GetxService {
     try {
       UserCredential credential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
-      return AlcoholFreeUser.fromUserCredential(credential);
+      return _getAlcoholFreeUser(credential);
     } on FirebaseAuthException catch (e) {
       if (e.code == AuthError.USER_NOT_FOUND) {
         rethrow;
@@ -52,7 +53,7 @@ class FirebaseAuthProvider extends GetxService {
     try {
       UserCredential credential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
-      return AlcoholFreeUser.fromUserCredential(credential);
+      return _getAlcoholFreeUser(credential);
     } on FirebaseAuthException catch (e) {
       if (e.code == AuthError.EMAIL_ALREADY_IN_USE) {
         rethrow;
@@ -63,5 +64,28 @@ class FirebaseAuthProvider extends GetxService {
       log("ERROR(AuthService.createAccount): ${e.toString()}");
     }
     return null;
+  }
+
+  bool isLoggedIn() {
+    return FirebaseAuth.instance.currentUser != null;
+  }
+
+  String? getUid() {;
+    return FirebaseAuth.instance.currentUser?.uid;
+  }
+
+  Future<AlcoholFreeUser> _getAlcoholFreeUser(UserCredential credential) async {
+    AlcoholFreeUser alcoholFreeUser;
+    final FirestoreProvider dbProvider = FirestoreProvider.to;
+
+    if (credential.additionalUserInfo!.isNewUser) {
+      alcoholFreeUser = AlcoholFreeUser.fromUserCredential(credential);
+      dbProvider.createUser(alcoholFreeUser.toJson());
+    } else {
+      alcoholFreeUser = AlcoholFreeUser.fromJson(
+          await dbProvider.readUser(credential.user!.uid));
+    }
+
+    return alcoholFreeUser;
   }
 }
