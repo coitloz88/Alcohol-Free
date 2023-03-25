@@ -13,6 +13,7 @@ class PromiseService extends GetxService {
   Future<PromiseService> init() async {
     if(_promiseRepository.isLoggedIn()) {
       _promiseList = await _promiseRepository.readPromiseList();
+      updatePromiseListCompletionStatus();
     }
     return this;
   }
@@ -22,5 +23,12 @@ class PromiseService extends GetxService {
     promise.pid = await _promiseRepository.createPromise(promise);
     _promiseList.add(promise);
     return promise;
+  }
+
+  void updatePromiseListCompletionStatus() {
+    for (Promise promise in _promiseList) {
+      // List<Journal> journalWithinPeriod = sth(promise.from, promise.to);
+      promise.requisite.updateCompletionStatus([]);
+    }
   }
 }
