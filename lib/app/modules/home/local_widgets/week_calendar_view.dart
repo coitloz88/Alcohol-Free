@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_timeline_calendar/timeline/flutter_timeline_calendar.dart';
 
@@ -6,13 +7,26 @@ class WeekCalendarView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        WeekCalendarContainer(),
-      ],
-    );
+    return Card(
+        shadowColor: Colors.black,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+            side: BorderSide(color: Color(0xFFFFEED5))),
+        child: Padding(
+          padding: EdgeInsetsDirectional.fromSTEB(24, 17, 24, 17),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              WeekCalendarContainer(),
+              SizedBox(height: 32),
+              WeekProgressContainer(
+                currentWeekAlcohol: 0,
+                heart: 0,
+              )
+            ],
+          ),
+        ));
   }
 }
 
@@ -37,9 +51,12 @@ class WeekCalendarContainer extends StatelessWidget {
 
 class WeekProgressContainer extends StatelessWidget {
   final int currentWeekAlcohol;
+  final int heart;
 
-  const WeekProgressContainer({Key? key, required this.currentWeekAlcohol})
+  const WeekProgressContainer(
+      {Key? key, required this.currentWeekAlcohol, required this.heart})
       : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -50,6 +67,18 @@ class WeekProgressContainer extends StatelessWidget {
           '이번주는 총 $currentWeekAlcohol회 마셨습니다. 잘하고 있어요!',
           style: const TextStyle(fontSize: 12),
         ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text('$heart '),
+            Icon(
+              CupertinoIcons.heart_fill,
+              size: 20,
+              color: Color(0xFFFFAC30),
+            )
+          ],
+        )
       ],
     );
   }
