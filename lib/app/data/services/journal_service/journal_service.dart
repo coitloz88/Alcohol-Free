@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:alcohol_free/app/data/models/drinking_journal.dart';
 import 'package:alcohol_free/app/data/models/sobriety_journal.dart';
 import 'package:alcohol_free/app/data/services/journal_service/journal_repository.dart';
+import 'package:alcohol_free/app/data/services/promise_service/promise_service.dart';
 import 'package:get/get.dart';
 
 import '../../models/journal.dart';
@@ -20,16 +21,11 @@ class JournalService extends GetxService {
     return this;
   }
 
-  Future<DrinkingJournal> createDrinkingJournal(journal) async {
+  Future<Journal> createJournal(Journal journal) async {
     // 그럼 여기서 값을 받을 때 service 부분이요!
     journal.jid = await _journalRepository.createJournal(journal);
     _journalList.add(journal);
-    return journal;
-  }
-
-  Future<SobrietyJournal> createSobrietyJournal(journal) async {
-    journal.jid = await _journalRepository.createJournal(journal);
-    _journalList.add(journal);
+    PromiseService.to.updatePromiseListCompletionStatus();
     return journal;
   }
 
@@ -51,14 +47,13 @@ class JournalService extends GetxService {
     return journalList;
   }
    */
-  List<Journal?> getJournalListWithinThePeriod(DateTime from, DateTime to) {
-    //log(_journalList.toString());
-    List<Journal?> journalListWithinThePeriod = _journalList.map((journalJson) {
+  List<Journal> getJournalListWithinThePeriod(DateTime from, DateTime to) {
+
+    List<Journal> journalListWithinThePeriod = _journalList.where((journalJson) {
       var time = journalJson.date;
-      if (from.compareTo(time) <= 0 && to.compareTo(time) >= 0) {
-        return journalJson;
-      }
+      return from.compareTo(time) <= 0 && to.compareTo(time) >= 0;
     }).toList();
+
     return journalListWithinThePeriod;
   }
 }

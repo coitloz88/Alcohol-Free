@@ -3,7 +3,6 @@ import 'package:alcohol_free/core/utils/app_initializations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:cupertino_icons/cupertino_icons.dart';
 import 'package:get/get.dart';
 import 'package:alcohol_free/main_view_controller.dart';
 
