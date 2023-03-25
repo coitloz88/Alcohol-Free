@@ -1,3 +1,4 @@
+import 'package:alcohol_free/app/modules/home/home_page.dart';
 import 'package:alcohol_free/core/languages/app_localizations.dart';
 import 'package:alcohol_free/core/utils/app_initializations.dart';
 import 'package:flutter/cupertino.dart';
@@ -66,7 +67,7 @@ class _BottomNavigatorState extends State<BottomNavigator> {
   final List<Widget> _widgetOptions = [
     const Text('약속 화면'),
     const Text('일지 화면'),
-    const Text('홈 화면'),
+    HomePageView(),
     const Text('커뮤니티 화면'),
     const Text('마이 화면'),
     //promisePage(), ... 등으로 .dart 파일 import 후 추가하면 됨
