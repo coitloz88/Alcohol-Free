@@ -2,7 +2,9 @@ import 'package:alcohol_free/app/modules/promise/local_widgets/progress_list_ite
 import 'package:flutter/material.dart';
 
 class PromiseListView extends StatelessWidget {
-  const PromiseListView({Key? key}) : super(key: key);
+  final double listViewHeight;
+  const PromiseListView({Key? key, required this.listViewHeight})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class PromiseListView extends StatelessWidget {
             ),
           ),
           SizedBox(
-              height: 235,
+              height: listViewHeight,
               child: ListView.builder(
                   shrinkWrap: true,
                   itemCount: 4,
