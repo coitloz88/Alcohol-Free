@@ -2,17 +2,34 @@ import 'package:alcohol_free/app/data/enums/requisite_type.dart';
 import 'package:alcohol_free/app/data/models/drinking_journal.dart';
 import 'package:alcohol_free/app/data/models/journal.dart';
 import 'package:alcohol_free/app/data/models/requisite.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ConsumptionBased extends Requisite {
   int targetAlcoholConsumption;
-  ConsumptionBased(super.from, super.to, this.targetAlcoholConsumption);
+
+  ConsumptionBased(super.from, super.to, super.ratio, super.isCompleted,
+      this.targetAlcoholConsumption);
 
   @override
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
       'type': RequisiteType.consumptionBased.index,
       'targetAlcoholConsumption': targetAlcoholConsumption,
+      'from': from,
+      'to': to,
+      'ratio': ratio,
+      'isCompleted': isCompleted,
     };
+  }
+
+  factory ConsumptionBased.fromJson(Map<String, dynamic> json) {
+    ConsumptionBased consumptionBased = ConsumptionBased(
+        (json['from'] as Timestamp).toDate(),
+        (json['to'] as Timestamp).toDate(),
+        json['ratio'] as double,
+        json['isCompleted'] as bool,
+        json['targetAlcoholConsumption'] as int);
+    return consumptionBased;
   }
 
   @override
