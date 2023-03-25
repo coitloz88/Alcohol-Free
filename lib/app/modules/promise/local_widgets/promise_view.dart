@@ -16,11 +16,13 @@ class PromiseListView extends StatelessWidget {
               style: TextStyle(fontWeight: FontWeight.w600),
             ),
           ),
-          ListView(
-            shrinkWrap: true,
-            scrollDirection: Axis.vertical,
-            children: const [ProgressListItemView()],
-          ),
+          SizedBox(
+              height: 235,
+              child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: 4,
+                  itemBuilder: (context, index) =>
+                      const ProgressListItemView())),
         ]));
   }
 }
