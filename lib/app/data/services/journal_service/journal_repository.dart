@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:alcohol_free/app/data/models/drinking_journal.dart';
 import 'package:alcohol_free/app/data/models/journal.dart';
 import 'package:alcohol_free/app/data/models/promise.dart';
@@ -22,6 +24,23 @@ class JournalRepository {
     List<Journal> journalList = journalJsonList
         .map((journalJson) => Journal.fromJson(journalJson))
         .toList();
+
+    return journalList;
+  }
+
+  // get Journal -> 읽은 후 type으로 뭔지 판단
+  Future<List<Journal?>> getJournalListWithinThePeriod(
+      DateTime from, DateTime to) async {
+    // from 보다 커야하고 to 보다 작아야 한다!
+    List<Map<String, dynamic>> journalJsonList =
+        await _dbProvider.readJournalList();
+    List<Journal?> journalList = journalJsonList.map((journalJson) {
+      var time = Journal.fromJson(journalJson).date;
+      if (from.difference(time).inDays <= 0 &&
+          to.difference(time).inDays >= 0) {
+        return Journal.fromJson(journalJson);
+      }
+    }).toList();
 
     return journalList;
   }

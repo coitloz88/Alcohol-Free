@@ -30,4 +30,11 @@ class JournalService extends GetxService {
     _journalList.add(journal);
     return journal;
   }
+
+  Future<List<Journal?>> getJournalListWithinThePeriod(
+      DateTime from, DateTime to) async {
+    var journalListWithinThePeriod =
+        await _journalRepository.getJournalListWithinThePeriod(from, to);
+    return journalListWithinThePeriod;
+  }
 }
