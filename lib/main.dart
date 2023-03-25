@@ -1,6 +1,7 @@
 import 'package:alcohol_free/core/languages/app_localizations.dart';
 import 'package:alcohol_free/core/utils/app_initializations.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:alcohol_free/app/modules/promise/promise_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
@@ -64,7 +65,7 @@ class BottomNavigator extends StatefulWidget {
 
 class _BottomNavigatorState extends State<BottomNavigator> {
   final List<Widget> _widgetOptions = [
-    const Text('약속 화면'),
+    PromisePageView(),
     const Text('일지 화면'),
     const Text('홈 화면'),
     const Text('커뮤니티 화면'),
