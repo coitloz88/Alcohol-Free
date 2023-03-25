@@ -1,10 +1,19 @@
+import 'package:alcohol_free/app/data/models/promise.dart';
+import 'package:alcohol_free/app/data/services/promise_service/promise_service.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
-class ProgressListItemView extends StatelessWidget {
-  const ProgressListItemView({Key? key}) : super(key: key);
+class ProgressListItemView extends StatefulWidget {
+  const ProgressListItemView(this.promise, {Key? key}) : super(key: key);
 
+  final Promise promise;
+
+  @override
+  State<ProgressListItemView> createState() => _ProgressListItemViewState();
+}
+
+class _ProgressListItemViewState extends State<ProgressListItemView> {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -23,15 +32,15 @@ class ProgressListItemView extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.end,
-              children: const [
+              children: [
                 Text(
-                  '이거 제목 글자수 제한',
+                  widget.promise.name,
                   style: TextStyle(fontWeight: FontWeight.w600),
                 ),
                 Align(
                   alignment: AlignmentDirectional(0, 0),
                   child: Text(
-                    '2022.02.23~2023.10.02',
+                    '${widget.promise.from}~${widget.promise.to}',
                     style: TextStyle(fontSize: 12),
                   ),
                 ),
@@ -51,16 +60,16 @@ class ProgressListItemView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Align(
+                    Align(
                       alignment: AlignmentDirectional(-1, 0),
                       child: Text(
-                        '주 1회만 하기',
+                        widget.promise.requisite.name,
                         textAlign: TextAlign.start,
                         style: TextStyle(fontSize: 12),
                       ),
                     ),
                     LinearPercentIndicator(
-                      percent: 0.5,
+                      percent: widget.promise.requisite.ratio, //TODO
                       width: 177,
                       lineHeight: 6,
                       animation: false,
@@ -73,13 +82,14 @@ class ProgressListItemView extends StatelessWidget {
                 ),
                 Row(
                   mainAxisSize: MainAxisSize.max,
-                  children: const [
+                  children: [
                     FaIcon(
                       FontAwesomeIcons.handshakeAngle,
                       color: Color(0xFFFFAC30),
                       size: 12,
                     ),
-                    Text(' 2', style: TextStyle(fontSize: 12)),
+                    Text(' ${widget.promise.friends.length}',
+                        style: TextStyle(fontSize: 12)),
                   ],
                 ),
                 Row(

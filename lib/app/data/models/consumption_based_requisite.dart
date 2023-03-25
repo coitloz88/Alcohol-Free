@@ -7,8 +7,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class ConsumptionBased extends Requisite {
   int targetAlcoholConsumption;
 
-  ConsumptionBased(super.from, super.to, super.ratio, super.isCompleted,
-      this.targetAlcoholConsumption);
+  ConsumptionBased(super.name, super.from, super.to, super.ratio,
+      super.isCompleted, this.targetAlcoholConsumption);
 
   @override
   Map<String, dynamic> toJson() {
@@ -24,6 +24,7 @@ class ConsumptionBased extends Requisite {
 
   factory ConsumptionBased.fromJson(Map<String, dynamic> json) {
     ConsumptionBased consumptionBased = ConsumptionBased(
+        "절주",
         (json['from'] as Timestamp).toDate(),
         (json['to'] as Timestamp).toDate(),
         json['ratio'] as double,
