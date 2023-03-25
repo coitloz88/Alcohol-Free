@@ -3,7 +3,6 @@ import 'package:alcohol_free/app/data/services/promise_service/promise_service.d
 import 'package:get/get.dart';
 
 class PromisePageViewController extends GetxController {
-  final PromiseService _promiseService = PromiseService.to;
   double _ratio = 0.0;
   double get ratio => _ratio;
 
@@ -13,6 +12,7 @@ class PromisePageViewController extends GetxController {
   }
 
   List<Promise> getPromiseList() {
+    PromiseService _promiseService = PromiseService.to;
     return _promiseService.promiseList;
   }
 }

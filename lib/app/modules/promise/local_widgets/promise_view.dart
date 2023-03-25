@@ -30,12 +30,6 @@ class PromiseListView extends StatelessWidget {
                         shrinkWrap: true,
                         itemCount: controller.getPromiseList().length,
                         itemBuilder: (context, index) {
-                          print(
-                              "_______\n\n_______\n\n_______\n\n_______\n\n_______\n\n_______\n\n");
-                          print(index);
-                          print(
-                              "_______\n\n_______\n\n_______\n\n_______\n\n_______\n\n_______\n\n");
-
                           return ProgressListItemView(
                               controller.getPromiseList()[index]);
                         })),
