@@ -10,6 +10,7 @@ abstract class Requisite {
 
   Requisite(this.from, this.to, this.ratio, this.isCompleted);
 
+
   factory Requisite.fromJson(json) {
     switch (RequisiteType.fromIndex(json['type'])) {
       case RequisiteType.consumptionBased:
