@@ -52,8 +52,6 @@ class DrinkingJournal implements Journal {
     List<String> friends =
         (json['friends'] as List<dynamic>).map((e) => e.toString()).toList();
 
-    log(friends.toString());
-
     DrinkingJournal journal = DrinkingJournal(
       (json['date'] as Timestamp).toDate(),
       JournalIcon.fromPath(json['icon']),
