@@ -22,4 +22,27 @@ class FriendsRepository {
 
     return friendList;
   }
+
+  // 응원하기
+  Future<String> createFighting(AlcoholFreeUser friend) async {
+    DocumentReference friendDocRef =
+        await _dbProvider.createFriend(friend.toJson());
+    return friendDocRef.id;
+  }
+
+  // 격려 하기
+  Future<String> createEncourage(AlcoholFreeUser friend) async {
+    DocumentReference friendDocRef =
+        await _dbProvider.createFriend(friend.toJson());
+    return friendDocRef.id;
+  }
+
+  // 목표 제안하기
+  Future<String> createGoal(AlcoholFreeUser friend) async {
+    DocumentReference friendDocRef =
+        await _dbProvider.createFriend(friend.toJson());
+    return friendDocRef.id;
+  }
+
+// 응원, 격려, 목표 제안 기능 추가
 }
