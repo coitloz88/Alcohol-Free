@@ -21,8 +21,9 @@ class ProfileView extends StatelessWidget {
               width: 62,
               height: 62,
               clipBehavior: Clip.antiAlias,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 shape: BoxShape.circle,
+                border: Border.all(color: Color(0xFFFFAC30)),
               ),
               child: Image.network(
                 'https://picsum.photos/seed/225/600',
@@ -43,8 +44,8 @@ class ProfileView extends StatelessWidget {
                   Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
                       child: Text(
-                        '내가 술을 또 마시면 개다.',
-                        style: TextStyle(fontSize: 16),
+                        '내가 술을 또 마시면 개다. 안녕하세요 말티즈입니다.',
+                        style: TextStyle(fontSize: 12),
                       )),
                 ],
               ),
