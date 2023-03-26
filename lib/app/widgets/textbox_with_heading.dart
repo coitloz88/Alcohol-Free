@@ -1,5 +1,7 @@
 
+import 'package:alcohol_free/app/modules/sobriety_journal/sobriety_journal_page_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class TextBoxWithHeading extends StatefulWidget {
   const TextBoxWithHeading(
@@ -15,7 +17,6 @@ class TextBoxWithHeading extends StatefulWidget {
 }
 
 class _TextBoxWithHeadingState extends State<TextBoxWithHeading> {
-  TextEditingController textEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,15 +35,19 @@ class _TextBoxWithHeadingState extends State<TextBoxWithHeading> {
             borderRadius: BorderRadius.circular(20),
           ),
           margin: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
-          child: TextFormField(
-            maxLines: null,
-            expands: true,
-            controller: textEditingController,
-            decoration: InputDecoration(
-              hintText: widget.hint,
-              contentPadding: const EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
-              border: InputBorder.none,
-            ),
+          child: GetBuilder<SobrietyJournalPageController>(
+            builder: (controller) {
+              return TextFormField(
+                maxLines: null,
+                expands: true,
+                controller: controller.textEditingController,
+                decoration: InputDecoration(
+                  hintText: widget.hint,
+                  contentPadding: const EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
+                  border: InputBorder.none,
+                ),
+              );
+            }
           ),
         )
       ],
