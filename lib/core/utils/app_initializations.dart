@@ -23,9 +23,9 @@ Future<void> initializeProviders() async {
 
 Future<void> initializeServices() async {
   // Service 생성 시 추가
-  Get.putAsync(() async => await NotificationService().init());
+  await Get.putAsync(() async => NotificationService().init());
   Get.put(AuthService());
-  Get.putAsync(() async => await UserService().init());
-  Get.putAsync(() async => await JournalService().init());
-  Get.putAsync(() async => await PromiseService().init());
+  await Get.putAsync(() async => UserService().init());
+  await Get.putAsync(() async => JournalService().init());
+  await Get.putAsync(() async => PromiseService().init());
 }

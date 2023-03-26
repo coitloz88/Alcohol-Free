@@ -6,15 +6,11 @@ class UserService extends GetxService {
   static UserService get to => Get.find<UserService>();
   final UserRepository _userRepository = UserRepository();
 
-  late AlcoholFreeUser _user;
-
-  set user(AlcoholFreeUser value) {
-    _user = value;
-  }
+  late AlcoholFreeUser user;
 
   Future<UserService> init() async {
-    if(_userRepository.isLoggedIn()) {
-      _user = await _userRepository.readUser();
+    if (_userRepository.isLoggedIn()) {
+      user = await _userRepository.readUser();
     }
     return this;
   }
