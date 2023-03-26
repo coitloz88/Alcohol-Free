@@ -9,16 +9,18 @@ class SobrietyJournalPageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: const [
-        JournalHeading("술 안 마신 날"),
-        MoodSelectionRow(),
-        TextBoxWithHeading(
-          heading: "왜 이런 기분이 들었나요?",
-          hint: "기분을 기록해보세요",
-          height: 300,
-        ),
-      ],
+    return Scaffold(
+      body: Column(
+        children: const [
+          JournalHeading("술 안 마신 날"),
+          MoodSelectionRow(),
+          TextBoxWithHeading(
+            heading: "왜 이런 기분이 들었나요?",
+            hint: "기분을 기록해보세요",
+            height: 300,
+          ),
+        ],
+      ),
     );
   }
 }

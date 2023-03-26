@@ -1,4 +1,9 @@
+import 'package:alcohol_free/app/modules/drinking_journal_add/drinking_journal_page.dart';
+import 'package:alcohol_free/app/modules/drinking_journal_add/drinking_journal_page_controller.dart';
+import 'package:alcohol_free/app/modules/sobriety_journal/sobriety_journal_page.dart';
+import 'package:alcohol_free/app/modules/sobriety_journal/sobriety_journal_page_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AddButton extends StatelessWidget {
   final Image buttonImage;
@@ -12,7 +17,13 @@ class AddButton extends StatelessWidget {
     return InkWell(
         borderRadius: BorderRadius.circular(20),
         onTap: () {
-          print('버튼 누름...');
+          isSober
+              ? Get.to(SobrietyJournalPageView(), binding: BindingsBuilder(() {
+                  Get.put(SobrietyJournalPageController());
+                }))
+              : Get.to(DrinkingJournalPage(), binding: BindingsBuilder(() {
+                  Get.put(DrinkingJournalPageController());
+                }));
         },
         child: Container(
             width: 170,

@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Alcohol Free',
       localizationsDelegates: const [
@@ -69,7 +69,7 @@ class BottomNavigator extends StatefulWidget {
 class _BottomNavigatorState extends State<BottomNavigator> {
   final List<Widget> _widgetOptions = [
     PromisePageView(),
-    SobrietyJournalPageView(),
+    CalendarPage(),
     HomePageView(),
     const Text('커뮤니티 화면'),
     const Text('마이 화면'),
