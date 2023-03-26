@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:alcohol_free/app/data/enums/journal_icon.dart';
+import 'package:alcohol_free/app/data/enums/mood_type.dart';
 import 'package:alcohol_free/app/data/enums/journal_type.dart';
 import 'package:alcohol_free/app/data/enums/level_of_being_drunk.dart';
 import 'package:alcohol_free/app/data/models/alcohol.dart';
@@ -13,7 +13,7 @@ class DrinkingJournal implements Journal {
   @override
   String description;
   @override
-  JournalIcon icon;
+  MoodType icon;
   @override
   late String jid;
 
@@ -54,7 +54,7 @@ class DrinkingJournal implements Journal {
 
     DrinkingJournal journal = DrinkingJournal(
       (json['date'] as Timestamp).toDate(),
-      JournalIcon.fromPath(json['icon']),
+      MoodType.fromPath(json['icon']),
       json['description'] as String,
       json['why'] as String,
       json['where'] as String,
