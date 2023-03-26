@@ -1,3 +1,4 @@
+import 'package:alcohol_free/app/widgets/widget_with_left_heading.dart';
 import 'package:flutter/material.dart';
 
 class TextBoxWithHeading extends StatefulWidget {
@@ -18,21 +19,14 @@ class _TextBoxWithHeadingState extends State<TextBoxWithHeading> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Align(
-          alignment: AlignmentDirectional(-0.8, 0),
-          child: Text(
-            widget.heading,
-          ),
-        ),
-        Container(
+    return WidgetWithLeftHeading(
+        heading: widget.heading,
+        childWidget: Container(
           height: widget.height,
           decoration: BoxDecoration(
             color: const Color(0x25686767),
             borderRadius: BorderRadius.circular(20),
           ),
-          margin: const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
           child: TextFormField(
             maxLines: null,
             expands: true,
@@ -43,8 +37,6 @@ class _TextBoxWithHeadingState extends State<TextBoxWithHeading> {
               border: InputBorder.none,
             ),
           ),
-        )
-      ],
-    );
+        ));
   }
 }
