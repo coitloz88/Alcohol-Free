@@ -40,7 +40,6 @@ class WeekCalendarContainer extends StatelessWidget {
       calendarLanguage: "en",
       calendarOptions: CalendarOptions(
         viewType: ViewType.DAILY,
-        toggleViewType: false,
       ),
       headerOptions: HeaderOptions(
           weekDayStringType: WeekDayStringTypes.SHORT,
