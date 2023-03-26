@@ -1,4 +1,5 @@
 import 'package:alcohol_free/app/data/providers/firebase_auth_provider.dart';
+import 'package:alcohol_free/app/modules/calendar/calendar_page.dart';
 import 'package:alcohol_free/app/modules/home/home_page.dart';
 import 'package:alcohol_free/app/modules/home/home_page_controller.dart';
 import 'package:alcohol_free/app/data/enums/level_of_access.dart';
@@ -82,7 +83,7 @@ class BottomNavigator extends StatefulWidget {
 class _BottomNavigatorState extends State<BottomNavigator> {
   final List<Widget> _widgetOptions = [
     PromisePageView(),
-    const Text('일지 화면'),
+    CalendarPage(),
     HomePageView(),
     const Text('커뮤니티 화면'),
     const Text('마이 화면'),
