@@ -1,4 +1,5 @@
 import 'package:alcohol_free/app/modules/home/home_page.dart';
+import 'package:alcohol_free/app/modules/home/home_page_controller.dart';
 import 'package:alcohol_free/core/languages/app_localizations.dart';
 import 'package:alcohol_free/core/utils/app_initializations.dart';
 import 'package:flutter/cupertino.dart';
@@ -119,6 +120,7 @@ class _BottomNavigatorState extends State<BottomNavigator> {
   @override
   void initState() {
     super.initState();
+    Get.put(HomePageController());
   }
 
   @override
