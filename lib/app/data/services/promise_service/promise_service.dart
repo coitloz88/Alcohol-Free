@@ -11,14 +11,16 @@ class PromiseService extends GetxService {
   List<Promise> get promiseList => _promiseList;
 
   Future<PromiseService> init() async {
-    if(_promiseRepository.isLoggedIn()) {
+    if (_promiseRepository.isLoggedIn()) {
       _promiseList = await _promiseRepository.readPromiseList();
     }
     return this;
   }
 
-  Future<Promise> createPromise(name, from, to, requisite, levelOfAccess, memo, friends) async {
-    Promise promise = Promise(name, from, to, requisite, levelOfAccess, memo, friends);
+  Future<Promise> createPromise(
+      name, from, to, requisite, levelOfAccess, memo, friends) async {
+    Promise promise =
+        Promise(name, from, to, requisite, levelOfAccess, memo, friends, 0);
     promise.pid = await _promiseRepository.createPromise(promise);
     _promiseList.add(promise);
     return promise;

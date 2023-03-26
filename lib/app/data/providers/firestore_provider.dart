@@ -99,4 +99,27 @@ class FirestoreProvider extends GetxService {
 
     return friendJsonList;
   }
+
+  Future<List<String>> getFriendPList(uid) async {
+    CollectionReference promiseCollection =
+        _userCollection.doc(uid).collection('promises');
+
+    QuerySnapshot? snapshot = await promiseCollection.get();
+
+    var promiseJsonList = snapshot.docs.map((promise) => promise.id).toList();
+
+    return promiseJsonList;
+  }
+
+  Future createSupport(uid, pid) async {
+    final ref = _userCollection.doc(uid).collection("promises").doc(pid);
+    ref.update({"support": FieldValue.increment(1)});
+  }
+
+  Future createEncourage(uid, pid) async {
+    final ref = _userCollection.doc(uid).collection("promises").doc(pid);
+    ref.update({"encourage": FieldValue.increment(1)});
+  }
+
+//QuerySnapshot? snapshot = await promiseCollection.get();
 }

@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:alcohol_free/app/data/services/friends_service/friends_service.dart';
 import 'package:alcohol_free/core/languages/app_localizations.dart';
 import 'package:alcohol_free/core/utils/app_initializations.dart';
 import 'package:flutter/cupertino.dart';
@@ -80,8 +83,13 @@ class _BottomNavigatorState extends State<BottomNavigator> {
       builder: (controller) {
         return Scaffold(
             body: SafeArea(
-              child: _widgetOptions.elementAt(controller.selectedIndex),
-            ),
+                // child: _widgetOptions.elementAt(controller.selectedIndex),
+                child: ElevatedButton(
+              child: Text('hi'),
+              onPressed: () {
+                fun();
+              },
+            )),
             bottomNavigationBar: BottomNavigationBar(
               type: BottomNavigationBarType.fixed,
               showSelectedLabels: false,
@@ -121,5 +129,10 @@ class _BottomNavigatorState extends State<BottomNavigator> {
   @override
   void dispose() {
     super.dispose();
+  }
+
+  void fun() {
+    var fs = Get.put(FriendsService());
+    log(fs.friendList.toString());
   }
 }
