@@ -1,5 +1,7 @@
 import 'package:alcohol_free/app/widgets/afree_drop_down_button.dart';
+import 'package:alcohol_free/app/widgets/confirm_button.dart';
 import 'package:alcohol_free/app/widgets/mood_selection_row.dart';
+import 'package:alcohol_free/app/widgets/textbox_with_heading.dart';
 import 'package:alcohol_free/app/widgets/widget_with_left_heading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -40,7 +42,9 @@ class DrinkingJournalPage extends StatelessWidget {
                             initialOption: '약속',
                           ))
                     ],
-                  ))
+                  )),
+              TextBoxWithHeading(heading: '메모', height: 70),
+              ConfirmButton(buttonText: '저장하기')
             ],
           )),
     ));
