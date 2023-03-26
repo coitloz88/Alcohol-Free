@@ -1,5 +1,6 @@
 import 'package:alcohol_free/app/data/enums/level_of_access.dart';
 import 'package:alcohol_free/app/data/models/alcohol_free_user.dart';
+import 'package:alcohol_free/app/data/models/day_based_requisite.dart';
 import 'package:alcohol_free/app/data/models/requisite.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 

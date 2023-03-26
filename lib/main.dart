@@ -1,3 +1,4 @@
+import 'package:alcohol_free/app/data/providers/firebase_auth_provider.dart';
 import 'package:alcohol_free/app/modules/home/home_page.dart';
 import 'package:alcohol_free/app/modules/home/home_page_controller.dart';
 import 'package:alcohol_free/core/languages/app_localizations.dart';
@@ -13,6 +14,8 @@ void main() async {
 
   await initializeFirebase();
   await initializeProviders();
+  await FirebaseAuthProvider.to
+      .signInWithEmailAndPassword("test@test.com", "password1234");
   await initializeServices();
 
   runApp(const MyApp());

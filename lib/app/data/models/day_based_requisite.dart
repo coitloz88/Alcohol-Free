@@ -10,8 +10,8 @@ class DayBased extends Requisite {
 
   @override
   Map<String, dynamic> toJson() {
-    return <String, dynamic> {
-      'type':RequisiteType.dayBased.index,
+    return <String, dynamic>{
+      'type': RequisiteType.dayBased.index,
       'from': from,
       'to': to,
       'ratio': ratio,
@@ -21,10 +21,11 @@ class DayBased extends Requisite {
 
   factory DayBased.fromJson(Map<String, dynamic> json) {
     DayBased dayBased = DayBased(
-        (json['from'] as Timestamp).toDate(),
-        (json['to'] as Timestamp).toDate(),
-        json['ratio'] as double,
-        json['isCompleted'] as bool,);
+      (json['from'] as Timestamp).toDate(),
+      (json['to'] as Timestamp).toDate(),
+      json['ratio'] as double,
+      json['isCompleted'] as bool,
+    );
     return dayBased;
   }
 
@@ -35,12 +36,12 @@ class DayBased extends Requisite {
     int totalDays = from.daysBetween(to);
 
     for (Journal journal in journalWithinPeriod) {
-      if(journal.runtimeType is DrinkingJournal) {
+      if (journal.runtimeType is DrinkingJournal) {
         --notDrunkenDays;
       }
     }
 
-    ratio = notDrunkenDays / totalDays;
+    ratio = notDrunkenDays / (totalDays);
     isCompleted = notDrunkenDays == totalDays ? true : false;
   }
 }
