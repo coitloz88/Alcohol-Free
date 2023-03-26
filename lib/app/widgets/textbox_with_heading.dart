@@ -33,7 +33,7 @@ class _TextBoxWithHeadingState extends State<TextBoxWithHeading> {
             controller: textEditingController,
             decoration: InputDecoration(
               hintText: widget.hint,
-              contentPadding: const EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
+              contentPadding: const EdgeInsets.all(16.0),
               border: InputBorder.none,
             ),
           ),

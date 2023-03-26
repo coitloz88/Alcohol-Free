@@ -29,18 +29,17 @@ class _AFreeDropDownButtonState extends State<AFreeDropDownButton> {
       onChanged: (value) => print('선택한 drop down menu $value'),
       buttonStyleData: ButtonStyleData(
         height: 44,
-        padding: const EdgeInsets.fromLTRB(24, 8, 24, 8),
+        padding: const EdgeInsets.only(left: 12, right: 12),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(24),
             color: Color.fromRGBO(243, 243, 243, 1)),
       ),
       iconStyleData: const IconStyleData(
-          iconSize: 20,
           icon: Icon(Icons.arrow_drop_down_rounded),
           openMenuIcon: Icon(Icons.arrow_drop_up_rounded),
           iconEnabledColor: Color.fromRGBO(63, 63, 63, 1)),
       menuItemStyleData: const MenuItemStyleData(
-          height: 40, padding: EdgeInsets.fromLTRB(24, 8, 24, 8)),
+          height: 40, padding: EdgeInsets.only(left: 12, right: 12)),
     ));
   }
 }
