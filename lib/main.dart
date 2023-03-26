@@ -1,3 +1,6 @@
+import 'package:alcohol_free/app/data/providers/firebase_auth_provider.dart';
+import 'package:alcohol_free/app/modules/home/home_page.dart';
+import 'package:alcohol_free/app/modules/home/home_page_controller.dart';
 import 'package:alcohol_free/app/data/enums/level_of_access.dart';
 import 'package:alcohol_free/app/data/models/alcohol_free_user.dart';
 import 'package:alcohol_free/app/data/models/day_based_requisite.dart';
@@ -20,6 +23,8 @@ void main() async {
 
   await initializeFirebase();
   await initializeProviders();
+  await FirebaseAuthProvider.to
+      .signInWithEmailAndPassword("test@test.com", "password1234");
   await initializeServices();
 
   runApp(const MyApp());
@@ -43,7 +48,10 @@ class MyApp extends StatelessWidget {
         supportedLocales: const [
           Locale('ko'), //Korean
         ],
-        theme: ThemeData(primaryColor: Colors.white, fontFamily: 'SUIT'),
+        theme: ThemeData(
+            primaryColor: Colors.white,
+            scaffoldBackgroundColor: Colors.white,
+            fontFamily: 'SUIT'),
         home: Scaffold(
           appBar: AppBar(
               toolbarHeight: 40.0,
@@ -75,7 +83,7 @@ class _BottomNavigatorState extends State<BottomNavigator> {
   final List<Widget> _widgetOptions = [
     PromisePageView(),
     const Text('일지 화면'),
-    const Text('홈 화면'),
+    HomePageView(),
     const Text('커뮤니티 화면'),
     const Text('마이 화면'),
     //promisePage(), ... 등으로 .dart 파일 import 후 추가하면 됨
@@ -137,6 +145,7 @@ class _BottomNavigatorState extends State<BottomNavigator> {
   @override
   void initState() {
     super.initState();
+    Get.put(HomePageController());
   }
 
   @override

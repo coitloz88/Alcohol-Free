@@ -47,6 +47,7 @@ dependencies:
 
   # for UI
   percent_indicator: ^4.0.1
+  flutter_timeline_calendar: ^1.0.1
   font_awesome_flutter: ^10.4.0
 
 dev_dependencies:
@@ -73,6 +74,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/logo_app_bar.png
+    - assets/images/empty_profile_circle.png
     - assets/images/empty_profile.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
