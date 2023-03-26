@@ -1,4 +1,5 @@
 import 'package:alcohol_free/app/modules/promise/local_widgets/promise_view.dart';
+import 'package:alcohol_free/app/modules/promise/promise_page_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:alcohol_free/app/modules/promise/local_widgets/promise_sort_option.dart';
@@ -29,6 +30,9 @@ class _PromisePageState extends State<PromisePageState> {
   @override
   void initState() {
     super.initState();
+
+    Get.put(PromisePageViewController());
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       setState(() {
         size = getSize(_pageKey);
