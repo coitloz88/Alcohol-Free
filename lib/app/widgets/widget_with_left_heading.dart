@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 class WidgetWithLeftHeading extends StatefulWidget {
   final String heading;
-  final Widget widget;
+  final Widget childWidget;
 
   const WidgetWithLeftHeading({
     super.key,
     required this.heading,
-    required this.widget,
+    required this.childWidget,
   });
 
   @override
@@ -25,7 +25,7 @@ class _WidgetWithLeftHeadingState extends State<WidgetWithLeftHeading> {
         Text(widget.heading,
             style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
         const SizedBox(height: 3),
-        widget,
+        widget.childWidget,
       ],
     );
   }
