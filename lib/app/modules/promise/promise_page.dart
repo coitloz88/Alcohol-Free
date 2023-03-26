@@ -11,7 +11,7 @@ class PromisePageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: PromisePageState());
+    return const PromisePageState();
   }
 }
 
