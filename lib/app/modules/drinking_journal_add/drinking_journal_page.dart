@@ -1,3 +1,7 @@
+import 'package:alcohol_free/app/widgets/afree_drop_down_button.dart';
+import 'package:alcohol_free/app/widgets/mood_selection_row.dart';
+import 'package:alcohol_free/app/widgets/widget_with_left_heading.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class DrinkingJournalPage extends StatelessWidget {
@@ -5,35 +9,40 @@ class DrinkingJournalPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return Scaffold(
+        body: SingleChildScrollView(
       child: Padding(
           padding: EdgeInsetsDirectional.all(20),
           child: Column(
             children: [
-              //오늘의 기분은 어땠나요?
+              MoodSelectionRow(),
+              WidgetWithLeftHeading(
+                  heading: '오늘은 무슨 일로 마시게 되었나요?',
+                  childWidget: AFreeDropDownButton(
+                    options: ['약속', '회식', '먹고 싶어서', '분위기'],
+                    initialOption: '약속',
+                  )),
+              WidgetWithLeftHeading(
+                  heading: '오늘은 무슨 일로 마시게 되었나요?',
+                  childWidget: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(
+                          flex: 1,
+                          child: AFreeDropDownButton(
+                            options: ['약속', '회식', '먹고 싶어서', '분위기'],
+                            initialOption: '약속',
+                          )),
+                      Flexible(
+                          flex: 1,
+                          child: AFreeDropDownButton(
+                            options: ['약속', '회식', '먹고 싶어서', '분위기'],
+                            initialOption: '약속',
+                          ))
+                    ],
+                  ))
             ],
           )),
-    );
-  }
-}
-
-class ContainerWithHeading extends StatelessWidget {
-  final String title;
-  Container container;
-
-  ContainerWithHeading(
-      {super.key, required this.title, required this.container});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text(title,
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
-        container,
-      ],
-    );
+    ));
   }
 }
