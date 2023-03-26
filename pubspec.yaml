@@ -76,6 +76,8 @@ flutter:
     - assets/images/logo_app_bar.png
     - assets/images/empty_profile_circle.png
     - assets/images/empty_profile.png
+    - assets/images/calendar_add_drink.png
+    - assets/images/calendar_add_sober.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
