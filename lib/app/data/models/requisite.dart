@@ -4,12 +4,12 @@ import 'package:alcohol_free/app/data/models/day_based_requisite.dart';
 import 'package:alcohol_free/app/data/models/journal.dart';
 
 abstract class Requisite {
+  String name;
   bool isCompleted = false;
   double ratio = 0.0;
   DateTime from, to;
 
-  Requisite(this.from, this.to, this.ratio, this.isCompleted);
-
+  Requisite(this.name, this.from, this.to, this.ratio, this.isCompleted);
 
   factory Requisite.fromJson(json) {
     switch (RequisiteType.fromIndex(json['type'])) {

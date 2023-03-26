@@ -1,6 +1,15 @@
+import 'package:alcohol_free/app/data/enums/level_of_access.dart';
+import 'package:alcohol_free/app/data/models/alcohol_free_user.dart';
+import 'package:alcohol_free/app/data/models/day_based_requisite.dart';
+import 'package:alcohol_free/app/data/models/requisite.dart';
+import 'package:alcohol_free/app/data/providers/firebase_auth_provider.dart';
+import 'package:alcohol_free/app/data/services/auth_service/auth_service.dart';
+import 'package:alcohol_free/app/data/services/promise_service/promise_service.dart';
 import 'package:alcohol_free/core/languages/app_localizations.dart';
 import 'package:alcohol_free/core/utils/app_initializations.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:alcohol_free/app/modules/promise/promise_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
@@ -64,7 +73,7 @@ class BottomNavigator extends StatefulWidget {
 
 class _BottomNavigatorState extends State<BottomNavigator> {
   final List<Widget> _widgetOptions = [
-    const Text('약속 화면'),
+    PromisePageView(),
     const Text('일지 화면'),
     const Text('홈 화면'),
     const Text('커뮤니티 화면'),
@@ -74,6 +83,19 @@ class _BottomNavigatorState extends State<BottomNavigator> {
 
   @override
   Widget build(BuildContext context) {
+    AuthService.to
+        .signInWithEmailAndPassword("test@test.com", "password1234")
+        .then((value) {
+      Future.delayed(Duration(seconds: 5)).then((value) {
+        PromiseService.to.createPromise(
+            "name",
+            DateTime.now(),
+            DateTime.now(),
+            DayBased("sample", DateTime.now(), DateTime.now(), 0.0, true),
+            LevelOfAccess.public,
+            "memo", <AlcoholFreeUser>[]);
+      });
+    });
     return GetBuilder<MainViewController>(
       init: MainViewController(),
       builder: (controller) {
