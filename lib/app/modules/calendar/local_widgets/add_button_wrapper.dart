@@ -12,9 +12,25 @@ class AddButtonWrapper extends StatelessWidget {
             height: 175,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: const [
-                Flexible(flex: 1, fit: FlexFit.loose, child: AddButton()),
-                Flexible(flex: 1, fit: FlexFit.loose, child: AddButton())
+              children: [
+                Flexible(
+                    flex: 1,
+                    fit: FlexFit.loose,
+                    child: AddButton(
+                      buttonImage: Image.asset(
+                          'assets/images/calendar_add_sober.png',
+                          fit: BoxFit.contain),
+                      isSober: true,
+                    )),
+                Flexible(
+                    flex: 1,
+                    fit: FlexFit.loose,
+                    child: AddButton(
+                      buttonImage: Image.asset(
+                          'assets/images/calendar_add_drink.png',
+                          fit: BoxFit.contain),
+                      isSober: false,
+                    ))
               ],
             )));
   }

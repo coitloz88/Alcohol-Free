@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 
 class AddButton extends StatelessWidget {
-  const AddButton({super.key});
+  final Image buttonImage;
+  final bool isSober;
+
+  const AddButton(
+      {super.key, required this.buttonImage, required this.isSober});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
+        borderRadius: BorderRadius.circular(20),
         onTap: () {
           print('버튼 누름...');
         },
@@ -15,6 +20,6 @@ class AddButton extends StatelessWidget {
             decoration: BoxDecoration(
                 border: Border.all(color: Colors.black),
                 borderRadius: BorderRadius.circular(20)),
-            child: const Center(child: Text('기록해보아요!'))));
+            child: Center(child: buttonImage)));
   }
 }
