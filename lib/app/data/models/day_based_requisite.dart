@@ -24,7 +24,7 @@ class DayBased extends Requisite {
       "금주",
       (json['from'] as Timestamp).toDate(),
       (json['to'] as Timestamp).toDate(),
-      json['ratio'] as double,
+      json['ratio'].toDouble(),
       json['isCompleted'] as bool,
     );
     return dayBased;
