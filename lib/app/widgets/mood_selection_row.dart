@@ -1,5 +1,7 @@
 import 'package:alcohol_free/app/data/enums/mood_type.dart';
+import 'package:alcohol_free/app/modules/sobriety_journal/sobriety_journal_page_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MoodSelectionRow extends StatelessWidget {
   const MoodSelectionRow({Key? key}) : super(key: key);
@@ -38,14 +40,20 @@ class MoodButton extends StatefulWidget {
 class _MoodButtonState extends State<MoodButton> {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => print("${widget.moodType.name} pressed"),
-      child: Column(
-        children: [
-          Image.asset('assets/images/${widget.moodType.name}.png'),
-          Text(widget.moodType.name)
-        ],
-      ),
+    return GetBuilder<SobrietyJournalPageController>(
+      builder: (controller) {
+        return GestureDetector(
+          onTap: () {
+            controller.moodType = widget.moodType;
+          },
+          child: Column(
+            children: [
+              Image.asset('assets/images/${widget.moodType.name}.png'),
+              Text(widget.moodType.name)
+            ],
+          ),
+        );
+      }
     );
   }
 }
