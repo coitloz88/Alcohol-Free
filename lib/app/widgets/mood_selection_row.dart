@@ -10,18 +10,12 @@ class MoodSelectionRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Align(
-          alignment: AlignmentDirectional(-0.8, 0),
-          child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-            child: Text(
-              '오늘의 기분은 어땠나요?',
-            ),
-          ),
+        Text(
+          '오늘의 기분은 어땠나요?',
         ),
         Row(
           mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: const [
             MoodButton(MoodType.sad),
             MoodButton(MoodType.angry),
