@@ -18,7 +18,7 @@ class PromiseListView extends StatefulWidget {
 class _PromiseListViewState extends State<PromiseListView> {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<PromisePageViewController>(builder: (controller) {
+    return GetBuilder<PromisePageController>(builder: (controller) {
       return Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
           child: Column(mainAxisSize: MainAxisSize.min, children: [
