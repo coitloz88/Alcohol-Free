@@ -2,12 +2,17 @@ import 'package:alcohol_free/app/widgets/widget_with_left_heading.dart';
 import 'package:flutter/material.dart';
 
 class TextBoxWithHeading extends StatefulWidget {
-  const TextBoxWithHeading(
-      {required this.heading, this.hint, required this.height, Key? key})
-      : super(key: key);
+  const TextBoxWithHeading({
+    required this.heading,
+    this.hint,
+    required this.height,
+    this.suffixText,
+    Key? key,
+  }) : super(key: key);
 
   final String heading;
   final String? hint;
+  final String? suffixText;
   final double height;
 
   @override
@@ -32,10 +37,10 @@ class _TextBoxWithHeadingState extends State<TextBoxWithHeading> {
             expands: true,
             controller: textEditingController,
             decoration: InputDecoration(
-              hintText: widget.hint,
-              contentPadding: const EdgeInsets.all(16.0),
-              border: InputBorder.none,
-            ),
+                hintText: widget.hint,
+                contentPadding: const EdgeInsets.all(16.0),
+                border: InputBorder.none,
+                suffixText: widget.suffixText),
           ),
         ));
   }
