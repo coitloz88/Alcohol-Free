@@ -26,7 +26,7 @@ void main() async {
   await initializeFirebase();
   await initializeProviders();
   await FirebaseAuthProvider.to
-      .signInWithEmailAndPassword("grace915@naver.com", "123456");
+      .signInWithEmailAndPassword("test@test.com", "password1234");
   await initializeServices();
 
   runApp(const MyApp());

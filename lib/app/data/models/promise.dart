@@ -50,7 +50,7 @@ class Promise {
       'requisite': requisite.toJson(),
       'levelOfAccess': levelOfAccess.index,
       'memo': memo,
-      'friends': friendsJson.toList(),
+      'friends': friendsJson?.toList(),
       'count': count,
     };
   }
