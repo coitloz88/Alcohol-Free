@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:alcohol_free/app/data/models/alcohol_free_user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
@@ -70,6 +73,72 @@ class FirestoreProvider extends GetxService {
     var json = snapshot.data() as Map<String, dynamic>?;
     if (json == null) throw Exception("user doesn't exist");
     json['uid'] = uid;
+
     return json;
+  }
+
+  Future<DocumentReference> createFriend(json) {
+    String uid = FirebaseAuth.instance.currentUser!.uid;
+
+    final CollectionReference friendsCollection =
+        _userCollection.doc(uid).collection('friends');
+
+    return friendsCollection.add(json);
+  }
+
+  Future<List<Map<String, dynamic>>> readFriendList() async {
+    String uid = FirebaseAuth.instance.currentUser!.uid;
+    log(uid);
+    CollectionReference friendsCollection =
+        _userCollection.doc(uid).collection('friends');
+
+    QuerySnapshot? snapshot = await friendsCollection.get();
+
+    var friendJsonList = snapshot.docs.map((friend) {
+      var json = friend.data() as Map<String, dynamic>;
+      return json;
+    }).toList();
+    return friendJsonList;
+  }
+
+  Future<List<String>> getFriendPList(uid) async {
+    CollectionReference promiseCollection =
+        _userCollection.doc(uid).collection('promises');
+
+    QuerySnapshot? snapshot = await promiseCollection.get();
+
+    var promiseJsonList = snapshot.docs.map((promise) => promise.id).toList();
+
+    return promiseJsonList;
+  }
+
+  Future createSupport(uid, pid) async {
+    final ref = _userCollection.doc(uid).collection("promises").doc(pid);
+    ref.update({"support": FieldValue.increment(1)});
+
+    // support 총 몇개인지 return 하고 싶어여
+  }
+
+  Future createEncourage(uid, pid) async {
+    final ref = _userCollection.doc(uid).collection("promises").doc(pid);
+    ref.update({"encourage": FieldValue.increment(1)});
+
+    // encourage 총 몇개인지 return 하고 싶어여
+  }
+
+//QuerySnapshot? snapshot = await promiseCollection.get();
+
+  Future<List<Map<String, dynamic>>> readUserList() async {
+    CollectionReference userCollection = _userCollection;
+
+    QuerySnapshot? snapshot = await userCollection.get();
+
+    var userJsonList = snapshot.docs.map((user) {
+      var json = user.data() as Map<String, dynamic>;
+      json['uid'] = user.id;
+      return json;
+    }).toList();
+
+    return userJsonList;
   }
 }
