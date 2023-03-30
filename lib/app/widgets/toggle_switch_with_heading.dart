@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 class ToggleSwitchWithHeading extends StatefulWidget {
   final String heading;
   final bool initValue;
-  Function handleToggle;
+  Function(bool) handleToggle;
 
   ToggleSwitchWithHeading(
       {super.key,
@@ -28,7 +28,7 @@ class _ToggleSwitchWithHeadingState extends State<ToggleSwitchWithHeading> {
         Switch(
           value: widget.initValue,
           onChanged: (bool value) {
-            widget.handleToggle();
+            widget.handleToggle(value);
           },
         ),
       ],

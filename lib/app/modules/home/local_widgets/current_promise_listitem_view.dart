@@ -1,6 +1,10 @@
+import 'package:alcohol_free/app/data/enums/level_of_access.dart';
 import 'package:alcohol_free/app/data/models/promise.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class CurrentPromiseListItemContainer extends StatelessWidget {
   final Promise promise;
@@ -23,6 +27,7 @@ class CurrentPromiseCardContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var ratioFormat = NumberFormat('###%', "en_US");
     return Padding(
         padding: EdgeInsets.all(12.0),
         child: Wrap(
@@ -31,10 +36,22 @@ class CurrentPromiseCardContainer extends StatelessWidget {
           spacing: 8,
           children: [
             Text('${promise.name}'),
-            Text('${promise.levelOfAccess.name}'),
+            promise.levelOfAccess.name == LevelOfAccess.public
+                ? const Icon(Icons.lock_open, size: 16)
+                : const Icon(Icons.lock, size: 16),
             Text(
-              '${promise.requisite.ratio * 100}%',
+              ratioFormat.format(promise.requisite.ratio),
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.w800),
+            ),
+            LinearPercentIndicator(
+              percent: promise.requisite.ratio,
+              width: 126,
+              lineHeight: 6,
+              animation: false,
+              progressColor: const Color(0xFFFFAC30),
+              backgroundColor: const Color(0xFFF1F4F8),
+              barRadius: const Radius.circular(5.5),
+              padding: EdgeInsets.zero,
             ),
             SizedBox(
               height: 44,
@@ -51,25 +68,14 @@ class CurrentPromiseCardContainer extends StatelessWidget {
                           color: Color(0xFFFFAC30),
                           size: 12,
                         ),
-                        Text(' ${promise.friends.length}',
+                        Text(
+                            ' ${promise.friends != null ? promise.friends?.length : 0}',
                             style: TextStyle(fontSize: 12)),
                       ],
                     ),
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        Container(
-                          width: 44,
-                          height: 44,
-                          clipBehavior: Clip.antiAlias,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                          ),
-                          child: Image.network(
-                            'https://picsum.photos/seed/342/600',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
                         Container(
                           width: 44,
                           height: 44,

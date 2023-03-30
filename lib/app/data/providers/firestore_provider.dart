@@ -154,7 +154,11 @@ class FirestoreProvider extends GetxService {
     int sum = 0;
     for (var element in snapshot.docs) {
       var json = element.data() as Map<String, dynamic>;
-      sum += json['support'] as int;
+      int buffer = 0;
+      if (json['support'] != null) {
+        buffer = json['support'] as int;
+      }
+      sum += buffer;
     }
     return sum;
   }

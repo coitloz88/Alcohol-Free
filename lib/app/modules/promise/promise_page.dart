@@ -102,22 +102,24 @@ class PromiseTabView extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           children: [
             const PromiseSortOptionContainer(),
-            PromiseListView(listViewHeight: height),
-            PromiseListView(listViewHeight: height),
+            PromiseListView(listViewHeight: height, isAlone: true),
+            PromiseListView(listViewHeight: height, isAlone: false),
           ],
         ),
         if (isMy)
-          FloatingActionButton(
-              backgroundColor: Color(0xfff3f3f3),
-              onPressed: () {
-                Get.to(NewPromisePage(), binding: BindingsBuilder(() {
-                  Get.put(NewPromisePageController());
-                }));
-              },
-              child: const Icon(
-                Icons.add,
-                color: Colors.black,
-              ))
+          Padding(
+              padding: EdgeInsets.all(20),
+              child: FloatingActionButton(
+                  backgroundColor: Color(0xfff3f3f3),
+                  onPressed: () {
+                    Get.to(NewPromisePage(), binding: BindingsBuilder(() {
+                      Get.put(NewPromisePageController());
+                    }));
+                  },
+                  child: const Icon(
+                    Icons.add,
+                    color: Colors.black,
+                  )))
       ],
     );
   }

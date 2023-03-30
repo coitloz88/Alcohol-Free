@@ -11,7 +11,7 @@ class Promise {
   Requisite requisite;
   LevelOfAccess levelOfAccess;
   String memo;
-  List<AlcoholFreeUserFriend> friends;
+  List<AlcoholFreeUserFriend>? friends;
   int count;
 
   late String pid;
@@ -20,9 +20,12 @@ class Promise {
       this.memo, this.friends, this.count);
 
   factory Promise.fromJson(Map<String, dynamic> json) {
-    List<AlcoholFreeUserFriend> friends = (json['friends'] as List<dynamic>)
-        .map((e) => AlcoholFreeUserFriend.fromJson(e as Map<String, dynamic>))
-        .toList();
+    List<AlcoholFreeUserFriend>? friends = json['friends'] != null
+        ? (json['friends'] as List<dynamic>)
+            .map((e) =>
+                AlcoholFreeUserFriend.fromJson(e as Map<String, dynamic>))
+            .toList()
+        : [];
 
     Promise promise = Promise(
         json['name'] as String,
@@ -38,7 +41,7 @@ class Promise {
   }
 
   Map<String, dynamic> toJson() {
-    var friendsJson = friends.map((e) => e.toJson());
+    var friendsJson = friends?.map((e) => e.toJson());
 
     return <String, dynamic>{
       'name': name,
