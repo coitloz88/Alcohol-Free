@@ -1,15 +1,15 @@
-enum JournalIcon {
-  happy("happy"),
+enum MoodType {
   sad("sad"),
-  soso("soso"),
   angry("angry"),
-  joy("joy");
+  relaxed("relaxed"),
+  happy("happy"),
+  joyful("joyful");
 
-  const JournalIcon(this.iconPath);
+  const MoodType(this.iconPath);
 
   final String iconPath;
 
-  factory JournalIcon.fromPath(String path) {
+  factory MoodType.fromPath(String path) {
     return values.firstWhere((element) => element.iconPath == path);
   }
 

@@ -1,5 +1,6 @@
 import 'package:alcohol_free/app/data/providers/firebase_auth_provider.dart';
 import 'package:alcohol_free/app/data/providers/firestore_provider.dart';
+import 'package:alcohol_free/app/data/services/journal_service/journal_service.dart';
 import 'package:alcohol_free/app/data/services/notification_service/notification_service.dart';
 import 'package:alcohol_free/app/data/services/auth_service/auth_service.dart';
 import 'package:alcohol_free/app/data/services/promise_service/promise_service.dart';
@@ -22,8 +23,9 @@ Future<void> initializeProviders() async {
 
 Future<void> initializeServices() async {
   // Service 생성 시 추가
-  Get.putAsync(() async => await NotificationService().init());
+  await Get.putAsync(() async => NotificationService().init());
   Get.put(AuthService());
-  Get.putAsync(() async => await UserService().init());
-  Get.putAsync(() async => await PromiseService().init());
+  await Get.putAsync(() async => UserService().init());
+  await Get.putAsync(() async => JournalService().init());
+  await Get.putAsync(() async => PromiseService().init());
 }

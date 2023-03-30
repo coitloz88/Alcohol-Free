@@ -2,7 +2,7 @@ import 'package:alcohol_free/app/data/enums/journal_type.dart';
 import 'package:alcohol_free/app/data/models/journal.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../enums/journal_icon.dart';
+import '../enums/mood_type.dart';
 
 class SobrietyJournal implements Journal {
   @override
@@ -10,7 +10,7 @@ class SobrietyJournal implements Journal {
   @override
   String description;
   @override
-  JournalIcon icon;
+  MoodType icon;
   @override
   late String jid;
 
@@ -21,7 +21,7 @@ class SobrietyJournal implements Journal {
 
     SobrietyJournal journal = SobrietyJournal(
       (json['date'] as Timestamp).toDate(),
-      JournalIcon.fromPath(json['icon']),
+      MoodType.fromPath(json['icon']),
       json['description'] as String,
     );
 

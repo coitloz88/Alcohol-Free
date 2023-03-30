@@ -1,6 +1,20 @@
+import 'package:alcohol_free/app/data/providers/firebase_auth_provider.dart';
+import 'package:alcohol_free/app/modules/calendar/calendar_page.dart';
+import 'package:alcohol_free/app/modules/home/home_page.dart';
+import 'package:alcohol_free/app/modules/home/home_page_controller.dart';
+import 'package:alcohol_free/app/data/enums/level_of_access.dart';
+import 'package:alcohol_free/app/data/models/alcohol_free_user.dart';
+import 'package:alcohol_free/app/data/models/day_based_requisite.dart';
+import 'package:alcohol_free/app/data/models/requisite.dart';
+import 'package:alcohol_free/app/data/providers/firebase_auth_provider.dart';
+import 'package:alcohol_free/app/data/services/auth_service/auth_service.dart';
+import 'package:alcohol_free/app/data/services/promise_service/promise_service.dart';
+import 'package:alcohol_free/app/modules/sobriety_journal/sobriety_journal_page.dart';
 import 'package:alcohol_free/core/languages/app_localizations.dart';
 import 'package:alcohol_free/core/utils/app_initializations.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:alcohol_free/app/modules/promise/promise_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
@@ -11,6 +25,8 @@ void main() async {
 
   await initializeFirebase();
   await initializeProviders();
+  await FirebaseAuthProvider.to
+      .signInWithEmailAndPassword("test@test.com", "password1234");
   await initializeServices();
 
   runApp(const MyApp());
@@ -22,36 +38,24 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Alcohol Free',
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: const [
-          Locale('ko'), //Korean
-        ],
-        theme: ThemeData(primaryColor: Colors.white, fontFamily: 'SUIT'),
-        home: Scaffold(
-          appBar: AppBar(
-              toolbarHeight: 40.0,
-              backgroundColor: Colors.transparent,
-              elevation: 0.0,
-              title: Image.asset('assets/images/logo_app_bar.png',
-                  height: 13, fit: BoxFit.fill),
-              actions: <Widget>[
-                IconButton(
-                  iconSize: 24,
-                  icon: const Icon(CupertinoIcons.bell,
-                      size: 24.0, color: Colors.black),
-                  onPressed: () {},
-                ),
-              ]),
-          body: const BottomNavigator(),
-        ));
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Alcohol Free',
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('ko'), //Korean
+      ],
+      theme: ThemeData(
+          primaryColor: Colors.white,
+          scaffoldBackgroundColor: Colors.white,
+          fontFamily: 'SUIT'),
+      home: const BottomNavigator(),
+    );
   }
 }
 
@@ -64,9 +68,9 @@ class BottomNavigator extends StatefulWidget {
 
 class _BottomNavigatorState extends State<BottomNavigator> {
   final List<Widget> _widgetOptions = [
-    const Text('약속 화면'),
-    const Text('일지 화면'),
-    const Text('홈 화면'),
+    PromisePageView(),
+    CalendarPage(),
+    HomePageView(),
     const Text('커뮤니티 화면'),
     const Text('마이 화면'),
     //promisePage(), ... 등으로 .dart 파일 import 후 추가하면 됨
@@ -78,6 +82,20 @@ class _BottomNavigatorState extends State<BottomNavigator> {
       init: MainViewController(),
       builder: (controller) {
         return Scaffold(
+            appBar: AppBar(
+                toolbarHeight: 40.0,
+                backgroundColor: Colors.transparent,
+                elevation: 0.0,
+                title: Image.asset('assets/images/logo_app_bar.png',
+                    height: 13, fit: BoxFit.fill),
+                actions: <Widget>[
+                  IconButton(
+                    iconSize: 24,
+                    icon: const Icon(CupertinoIcons.bell,
+                        size: 24.0, color: Colors.black),
+                    onPressed: () {},
+                  ),
+                ]),
             body: SafeArea(
               child: _widgetOptions.elementAt(controller.selectedIndex),
             ),
@@ -115,6 +133,7 @@ class _BottomNavigatorState extends State<BottomNavigator> {
   @override
   void initState() {
     super.initState();
+    Get.put(HomePageController());
   }
 
   @override

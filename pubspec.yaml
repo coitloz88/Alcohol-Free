@@ -46,6 +46,13 @@ dependencies:
   firebase_storage: ^11.0.16
   firebase_database: ^10.0.16
 
+  # for UI
+  percent_indicator: ^4.0.1
+  flutter_timeline_calendar: ^1.0.1
+  font_awesome_flutter: ^10.4.0
+  dropdown_button2: ^2.0.0
+  quantity_input: ^1.0.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -69,7 +76,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/logo_app_bar.png
+    - assets/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -1,4 +1,6 @@
+import 'package:alcohol_free/app/data/models/journal.dart';
 import 'package:alcohol_free/app/data/models/promise.dart';
+import 'package:alcohol_free/app/data/services/journal_service/journal_service.dart';
 import 'package:alcohol_free/app/data/services/promise_service/promise_repository.dart';
 import 'package:get/get.dart';
 
@@ -13,6 +15,7 @@ class PromiseService extends GetxService {
   Future<PromiseService> init() async {
     if (_promiseRepository.isLoggedIn()) {
       _promiseList = await _promiseRepository.readPromiseList();
+      updatePromiseListCompletionStatus();
     }
     return this;
   }
@@ -24,5 +27,12 @@ class PromiseService extends GetxService {
     promise.pid = await _promiseRepository.createPromise(promise);
     _promiseList.add(promise);
     return promise;
+  }
+
+  void updatePromiseListCompletionStatus() {
+    for (Promise promise in _promiseList) {
+      List<Journal> journalWithinPeriod = JournalService.to.getJournalListWithinThePeriod(promise.from, promise.to);
+      promise.requisite.updateCompletionStatus(journalWithinPeriod);
+    }
   }
 }

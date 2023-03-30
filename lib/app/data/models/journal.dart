@@ -1,4 +1,4 @@
-import 'package:alcohol_free/app/data/enums/journal_icon.dart';
+import 'package:alcohol_free/app/data/enums/mood_type.dart';
 import 'package:alcohol_free/app/data/enums/journal_type.dart';
 import 'package:alcohol_free/app/data/models/sobriety_journal.dart';
 
@@ -6,7 +6,7 @@ import 'drinking_journal.dart';
 
 abstract class Journal {
   DateTime date;
-  JournalIcon icon;
+  MoodType icon;
   String description;
 
   late String jid;

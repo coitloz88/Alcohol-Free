@@ -1,12 +1,16 @@
+import 'dart:developer';
+
 import 'package:alcohol_free/app/data/models/drinking_journal.dart';
 import 'package:alcohol_free/app/data/models/journal.dart';
 import 'package:alcohol_free/app/data/models/promise.dart';
 import 'package:alcohol_free/app/data/models/sobriety_journal.dart';
+import 'package:alcohol_free/app/data/providers/firebase_auth_provider.dart';
 import 'package:alcohol_free/app/data/providers/firestore_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class JournalRepository {
   final FirestoreProvider _dbProvider = FirestoreProvider.to;
+  final FirebaseAuthProvider _authProvider = FirebaseAuthProvider.to;
 
   // create Journal -> type 포함해서 create
   Future<String> createJournal(Journal journal) async {
@@ -24,5 +28,9 @@ class JournalRepository {
         .toList();
 
     return journalList;
+  }
+
+  bool isLoggedIn() {
+    return _authProvider.isLoggedIn();
   }
 }

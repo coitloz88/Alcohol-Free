@@ -8,11 +8,7 @@ class UserService extends GetxService {
   final UserRepository _userRepository = UserRepository();
   final FirestoreProvider _dbProvider = FirestoreProvider.to;
 
-  late AlcoholFreeUser _user;
-
-  set user(AlcoholFreeUser value) {
-    _user = value;
-  }
+  late AlcoholFreeUser user;
 
   Future<UserService> init() async {
     if (_userRepository.isLoggedIn()) {
