@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 class ConfirmButton extends StatefulWidget {
   final String buttonText;
 
-  const ConfirmButton({super.key, required this.buttonText});
+  ConfirmButton({required this.onPressed, super.key, required this.buttonText});
+
+  void Function() onPressed;
 
   @override
   State<ConfirmButton> createState() => _ConfirmButtonState();
@@ -23,7 +25,7 @@ class _ConfirmButtonState extends State<ConfirmButton> {
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
-            onPressed: () => print('버튼 눌림!'),
+            onPressed: widget.onPressed,
             child: Text(widget.buttonText)));
   }
 }
