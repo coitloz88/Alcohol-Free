@@ -32,7 +32,7 @@ class SobrietyJournal implements Journal {
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
       'date': date,
-      'icon': icon.toJson(),
+      'icon': icon.toString(),
       'description': description,
       'type': JournalType.sobrietyJournal.index,
     };

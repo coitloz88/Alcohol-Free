@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MoodSelectionRow extends StatelessWidget {
-  const MoodSelectionRow({Key? key}) : super(key: key);
-
+  MoodSelectionRow(this.moodTypeWrapper, {Key? key}) : super(key: key);
+  MoodTypeWrapper moodTypeWrapper;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -16,12 +16,12 @@ class MoodSelectionRow extends StatelessWidget {
         Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: const [
-            MoodButton(MoodType.sad),
-            MoodButton(MoodType.angry),
-            MoodButton(MoodType.relaxed),
-            MoodButton(MoodType.happy),
-            MoodButton(MoodType.joyful),
+          children: [
+            MoodButton(MoodType.sad, moodTypeWrapper),
+            MoodButton(MoodType.angry, moodTypeWrapper),
+            MoodButton(MoodType.relaxed, moodTypeWrapper),
+            MoodButton(MoodType.happy, moodTypeWrapper),
+            MoodButton(MoodType.joyful, moodTypeWrapper),
           ],
         )
       ],
@@ -30,8 +30,9 @@ class MoodSelectionRow extends StatelessWidget {
 }
 
 class MoodButton extends StatefulWidget {
-  const MoodButton(this.moodType, {Key? key}) : super(key: key);
+  MoodButton(this.moodType, this.moodTypeWrapper, {Key? key}) : super(key: key);
   final MoodType moodType;
+  MoodTypeWrapper moodTypeWrapper;
 
   @override
   State<MoodButton> createState() => _MoodButtonState();
@@ -40,20 +41,17 @@ class MoodButton extends StatefulWidget {
 class _MoodButtonState extends State<MoodButton> {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<SobrietyJournalPageController>(
-      builder: (controller) {
-        return GestureDetector(
-          onTap: () {
-            controller.moodType = widget.moodType;
-          },
-          child: Column(
-            children: [
-              Image.asset('assets/images/${widget.moodType.name}.png'),
-              Text(widget.moodType.name)
-            ],
-          ),
-        );
-      }
+    return GestureDetector(
+      onTap: () {
+        widget.moodTypeWrapper.moodType = widget.moodType;
+        print(widget.moodTypeWrapper.moodType);
+      },
+      child: Column(
+        children: [
+          Image.asset('assets/images/${widget.moodType.name}.png'),
+          Text(widget.moodType.name)
+        ],
+      ),
     );
   }
 }

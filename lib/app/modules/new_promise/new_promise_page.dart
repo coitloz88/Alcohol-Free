@@ -1,6 +1,7 @@
 import 'package:alcohol_free/app/modules/new_promise/local_widgets/add_friend_button.dart';
 import 'package:alcohol_free/app/modules/new_promise/new_promise_page_controller.dart';
 import 'package:alcohol_free/app/widgets/confirm_button.dart';
+import 'package:alcohol_free/app/widgets/data_picker.dart';
 import 'package:alcohol_free/app/widgets/textbox_with_heading.dart';
 import 'package:alcohol_free/app/widgets/toggle_switch_with_heading.dart';
 import 'package:alcohol_free/app/widgets/widget_with_left_heading.dart';
@@ -44,10 +45,21 @@ class _NewPromisePageState extends State<NewPromisePage> {
           body: SingleChildScrollView(
             child: Padding(
                 padding: EdgeInsetsDirectional.all(20),
-                child: Column(
+                child: Wrap(
+                  runSpacing: 12.0,
                   children: [
                     TextBoxWithHeading(
-                        heading: '목표 이름', height: 44, hint: '어떤 목표인지 알려주세요:)'),
+                      heading: '목표 이름',
+                      height: 44,
+                      hint: '어떤 목표인지 알려주세요:)',
+                      textEditingController: controller.textEditingController,
+                    ),
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          DataPickerWithHeading(heading: '시작일'),
+                          DataPickerWithHeading(heading: '종료일')
+                        ]),
                     ToggleSwitchWithHeading(
                         heading: '공개여부',
                         initValue: controller.isPublic,
@@ -58,7 +70,11 @@ class _NewPromisePageState extends State<NewPromisePage> {
                         initValue: controller.isNotification,
                         handleToggle: (value) =>
                             {controller.updateIsNotification(value)}),
-                    TextBoxWithHeading(heading: '메모', height: 70),
+                    TextBoxWithHeading(
+                      heading: '메모',
+                      height: 70,
+                      textEditingController: controller.textEditingController,
+                    ),
                     Container(
                         width: double.infinity,
                         height: 12,
@@ -67,7 +83,10 @@ class _NewPromisePageState extends State<NewPromisePage> {
                         alignment: Alignment.centerLeft,
                         child: WidgetWithLeftHeading(
                             heading: '지킴이', childWidget: AddFriendButton())),
-                    ConfirmButton(buttonText: '시작하기')
+                    ConfirmButton(
+                      buttonText: '시작하기',
+                      onPressed: () => print("asdasd"),
+                    )
                   ],
                 )),
           ));
