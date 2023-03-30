@@ -8,8 +8,11 @@ import '../promise_page_controller.dart';
 
 class PromiseListView extends StatefulWidget {
   final double listViewHeight;
+  final bool isAlone;
 
-  PromiseListView({Key? key, required this.listViewHeight}) : super(key: key);
+  PromiseListView(
+      {Key? key, required this.listViewHeight, required this.isAlone})
+      : super(key: key);
 
   @override
   State<PromiseListView> createState() => _PromiseListViewState();
@@ -22,10 +25,10 @@ class _PromiseListViewState extends State<PromiseListView> {
       return Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
           child: Column(mainAxisSize: MainAxisSize.min, children: [
-            const Align(
+            Align(
               alignment: AlignmentDirectional(-1, -1),
               child: Text(
-                '진행중인 약속',
+                widget.isAlone ? '혼자 하는 약속' : '같이 하는 약속',
                 style: TextStyle(fontWeight: FontWeight.w600),
               ),
             ),
@@ -33,10 +36,10 @@ class _PromiseListViewState extends State<PromiseListView> {
                 height: widget.listViewHeight,
                 child: ListView.builder(
                     shrinkWrap: true,
-                    itemCount: controller.getPromiseList().length,
+                    itemCount: controller.getPromiseList(widget.isAlone).length,
                     itemBuilder: (context, index) {
                       return ProgressListItemView(
-                          controller.getPromiseList()[index]);
+                          controller.getPromiseList(widget.isAlone)[index]);
                     })),
           ]));
     });

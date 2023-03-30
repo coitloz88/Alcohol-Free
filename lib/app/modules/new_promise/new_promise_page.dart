@@ -1,3 +1,7 @@
+import 'package:alcohol_free/app/data/enums/level_of_access.dart';
+import 'package:alcohol_free/app/data/models/day_based_requisite.dart';
+import 'package:alcohol_free/app/data/models/promise.dart';
+import 'package:alcohol_free/app/data/models/requisite.dart';
 import 'package:alcohol_free/app/modules/new_promise/local_widgets/add_friend_button.dart';
 import 'package:alcohol_free/app/modules/new_promise/new_promise_page_controller.dart';
 import 'package:alcohol_free/app/widgets/confirm_button.dart';
@@ -6,6 +10,7 @@ import 'package:alcohol_free/app/widgets/textbox_with_heading.dart';
 import 'package:alcohol_free/app/widgets/toggle_switch_with_heading.dart';
 import 'package:alcohol_free/app/widgets/widget_with_left_heading.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 
 class NewPromisePage extends StatefulWidget {
@@ -52,7 +57,12 @@ class _NewPromisePageState extends State<NewPromisePage> {
                       heading: '목표 이름',
                       height: 44,
                       hint: '어떤 목표인지 알려주세요:)',
-                      textEditingController: controller.textEditingController,
+                      textEditingController: controller.nameEditingController,
+                    ),
+                    TextBoxWithHeading(
+                      heading: '메모',
+                      height: 70,
+                      textEditingController: controller.rewardEditingController,
                     ),
                     Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -73,7 +83,7 @@ class _NewPromisePageState extends State<NewPromisePage> {
                     TextBoxWithHeading(
                       heading: '메모',
                       height: 70,
-                      textEditingController: controller.textEditingController,
+                      textEditingController: controller.memoEditingController,
                     ),
                     Container(
                         width: double.infinity,
@@ -85,7 +95,27 @@ class _NewPromisePageState extends State<NewPromisePage> {
                             heading: '지킴이', childWidget: AddFriendButton())),
                     ConfirmButton(
                       buttonText: '시작하기',
-                      onPressed: () => print("asdasd"),
+                      onPressed: () {
+                        controller.onConfirm(Promise(
+                            controller.nameEditingController.text,
+                            DateTime.now(),
+                            DateTime.now().add(Duration(days: 30)),
+                            DayBased(
+                                '주 1회만 마시기',
+                                DateTime.now(),
+                                DateTime.now().add(
+                                  Duration(days: 30),
+                                ),
+                                0,
+                                false), //금주 or 절주
+                            controller.isPublic
+                                ? LevelOfAccess.public
+                                : LevelOfAccess.private, //공개 여부
+                            controller.memoEditingController.text,
+                            controller.selectedFriends,
+                            0));
+                        Get.back();
+                      },
                     )
                   ],
                 )),

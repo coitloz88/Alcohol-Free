@@ -1,3 +1,4 @@
+import 'package:alcohol_free/app/data/services/promise_service/promise_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_timeline_calendar/timeline/flutter_timeline_calendar.dart';
@@ -22,7 +23,7 @@ class WeekCalendarView extends StatelessWidget {
               SizedBox(height: 32),
               WeekProgressContainer(
                 currentWeekAlcohol: 0,
-                heart: 0,
+                heart: PromiseService.to.sumOfSupports,
               )
             ],
           ),

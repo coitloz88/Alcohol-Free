@@ -26,4 +26,9 @@ class PromiseRepository {
   bool isLoggedIn() {
     return _authProvider.isLoggedIn();
   }
+
+  Future<int> getSumOfSupports() async {
+    var sum = await _dbProvider.getSumOfSupports();
+    return sum;
+  }
 }

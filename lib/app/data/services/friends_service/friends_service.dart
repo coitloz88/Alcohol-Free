@@ -1,5 +1,6 @@
 import 'package:alcohol_free/app/data/models/alcohol_free_user.dart';
 import 'package:alcohol_free/app/data/models/alcohol_free_user_friend.dart';
+import 'package:alcohol_free/app/data/models/promise.dart';
 import 'package:alcohol_free/app/data/services/friends_service/friends_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
