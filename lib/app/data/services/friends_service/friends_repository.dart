@@ -16,7 +16,9 @@ class FriendsRepository {
   }
 
   // 친구 만들기
-  Future<String> createFriend(AlcoholFreeUser friend) async {
+  Future<String> createFriend(AlcoholFreeUser user, List<String> plist) async {
+    AlcoholFreeUserFriend friend =
+        AlcoholFreeUserFriend(user.uid, user.nickname, plist);
     DocumentReference friendDocRef =
         await _dbProvider.createFriend(friend.toJson());
     return friendDocRef.id;
@@ -49,9 +51,14 @@ class FriendsRepository {
   }
 
   Future createEncourage(String uid, String pid) async {
-    var support = await _dbProvider.createEncourage(uid, pid);
-    return support;
+    var encourage = await _dbProvider.createEncourage(uid, pid);
+    return encourage;
   }
-
+/*
+  Future suggestPromise(String uid, Promise promise) async {
+    var promise = await _dbProvider.suggestPromise(uid, promise);
+    return promise;
+  }
+*/
 // 응원, 격려, 목표 제안 기능 추가
 }

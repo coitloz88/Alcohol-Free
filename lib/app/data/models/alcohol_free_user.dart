@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class AlcoholFreeUser {
   String uid;
-  String nickname;
+  String? nickname = "";
   String email;
   String selfDescription;
 
@@ -16,11 +16,8 @@ class AlcoholFreeUser {
   AlcoholFreeUser(this.uid, this.nickname, this.email, this.selfDescription);
 
   factory AlcoholFreeUser.fromJson(Map<String, dynamic> json) {
-    return AlcoholFreeUser(
-        json['uid'] as String,
-        json['nickname'] as String,
-        json['email'] as String,
-        json['selfDescription'] as String);
+    return AlcoholFreeUser(json['uid'] as String, json['nickname'] as String,
+        json['email'] as String, json['selfDescription'] as String);
   }
 
   Map<String, dynamic> toJson() {
