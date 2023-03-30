@@ -9,12 +9,16 @@ class PromiseService extends GetxService {
   final PromiseRepository _promiseRepository = PromiseRepository();
 
   List<Promise> _promiseList = [];
+  List<Promise> _sharedPromiseList = [];
 
   List<Promise> get promiseList => _promiseList;
+
+  List<Promise> get sharedPromiseList => _sharedPromiseList;
 
   Future<PromiseService> init() async {
     if (_promiseRepository.isLoggedIn()) {
       _promiseList = await _promiseRepository.readPromiseList();
+      _sharedPromiseList = await _promiseRepository.getFriendsPromiseList();
       updatePromiseListCompletionStatus();
     }
     return this;
@@ -31,7 +35,8 @@ class PromiseService extends GetxService {
 
   void updatePromiseListCompletionStatus() {
     for (Promise promise in _promiseList) {
-      List<Journal> journalWithinPeriod = JournalService.to.getJournalListWithinThePeriod(promise.from, promise.to);
+      List<Journal> journalWithinPeriod = JournalService.to
+          .getJournalListWithinThePeriod(promise.from, promise.to);
       promise.requisite.updateCompletionStatus(journalWithinPeriod);
     }
   }

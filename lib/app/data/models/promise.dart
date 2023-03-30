@@ -1,5 +1,6 @@
 import 'package:alcohol_free/app/data/enums/level_of_access.dart';
 import 'package:alcohol_free/app/data/models/alcohol_free_user.dart';
+import 'package:alcohol_free/app/data/models/alcohol_free_user_friend.dart';
 import 'package:alcohol_free/app/data/models/day_based_requisite.dart';
 import 'package:alcohol_free/app/data/models/requisite.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -10,7 +11,7 @@ class Promise {
   Requisite requisite;
   LevelOfAccess levelOfAccess;
   String memo;
-  List<AlcoholFreeUser> friends;
+  List<AlcoholFreeUserFriend> friends;
   int count;
 
   late String pid;
@@ -19,8 +20,8 @@ class Promise {
       this.memo, this.friends, this.count);
 
   factory Promise.fromJson(Map<String, dynamic> json) {
-    List<AlcoholFreeUser> friends = (json['friends'] as List<dynamic>)
-        .map((e) => AlcoholFreeUser.fromJson(e as Map<String, dynamic>))
+    List<AlcoholFreeUserFriend> friends = (json['friends'] as List<dynamic>)
+        .map((e) => AlcoholFreeUserFriend.fromJson(e as Map<String, dynamic>))
         .toList();
 
     Promise promise = Promise(
