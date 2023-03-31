@@ -40,7 +40,7 @@ class _ProgressListItemViewState extends State<ProgressListItemView> {
                 Align(
                   alignment: AlignmentDirectional(0, 0),
                   child: Text(
-                    '${widget.promise.from.year.toString()}-${widget.promise.from.month.toString().padLeft(2, '0')}-${widget.promise.from.day.toString().padLeft(2, '0')}~${widget.promise.to.year.toString()}-${widget.promise.to.month.toString().padLeft(2, '0')}-${widget.promise.to.day.toString().padLeft(2, '0')}',
+                    '${widget.promise.from.year.toString()}.${widget.promise.from.month.toString().padLeft(2, '0')}.${widget.promise.from.day.toString().padLeft(2, '0')}~${widget.promise.to.year.toString()}.${widget.promise.to.month.toString().padLeft(2, '0')}.${widget.promise.to.day.toString().padLeft(2, '0')}',
                     style: TextStyle(fontSize: 12),
                   ),
                 ),

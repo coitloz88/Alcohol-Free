@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class NewPromisePageController extends GetxController {
+  DateTime _from = DateTime.now();
+  DateTime _to = DateTime.now();
   bool _isPublic = false;
   bool _isNotification = false;
   List<AlcoholFreeUserFriend> _selectedFriends = [];
@@ -15,12 +17,24 @@ class NewPromisePageController extends GetxController {
   TextEditingController rewardEditingController = TextEditingController();
   TextEditingController memoEditingController = TextEditingController();
 
+  DateTime get from => _from;
+  DateTime get to => _to;
   bool get isPublic => _isPublic;
   bool get isNotification => _isNotification;
   List<AlcoholFreeUserFriend> get selectedFriends => _selectedFriends;
 
   void updateIsPublic(bool newIsPublic) {
     _isPublic = newIsPublic;
+    update();
+  }
+
+  void updateFrom(DateTime newFrom) {
+    _from = newFrom;
+    update();
+  }
+
+  void updateTo(DateTime newTo) {
+    _to = newTo;
     update();
   }
 
