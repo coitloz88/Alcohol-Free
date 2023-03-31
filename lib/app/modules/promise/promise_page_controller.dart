@@ -8,10 +8,11 @@ import 'package:get/get.dart';
 
 class PromisePageController extends GetxController {
   List<Promise> getPromiseList(bool isAlone) {
-    if (isAlone)
+    if (isAlone) {
       return PromiseService.to.getAlonePromiseList();
-    else
+    } else {
       return PromiseService.to.getWithPromiseList();
+    }
   }
 
   List<AlcoholFreeUserFriend> getFriends() {
@@ -23,8 +24,6 @@ class PromisePageController extends GetxController {
   }
 
   Future<void> createSupport(String uid, String pid) async {
-    print(uid);
-    print(pid);
     return FriendsService.to.createSupport(uid, pid);
   }
 }

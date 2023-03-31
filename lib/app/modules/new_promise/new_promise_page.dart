@@ -1,11 +1,10 @@
 import 'package:alcohol_free/app/data/enums/level_of_access.dart';
 import 'package:alcohol_free/app/data/models/day_based_requisite.dart';
 import 'package:alcohol_free/app/data/models/promise.dart';
-import 'package:alcohol_free/app/data/models/requisite.dart';
 import 'package:alcohol_free/app/modules/new_promise/local_widgets/add_friend_button.dart';
 import 'package:alcohol_free/app/modules/new_promise/new_promise_page_controller.dart';
 import 'package:alcohol_free/app/widgets/confirm_button.dart';
-import 'package:alcohol_free/app/widgets/data_picker.dart';
+import 'package:alcohol_free/app/modules/new_promise/local_widgets/data_picker.dart';
 import 'package:alcohol_free/app/widgets/textbox_with_heading.dart';
 import 'package:alcohol_free/app/widgets/toggle_switch_with_heading.dart';
 import 'package:alcohol_free/app/widgets/widget_with_left_heading.dart';
@@ -67,8 +66,8 @@ class _NewPromisePageState extends State<NewPromisePage> {
                     Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          DataPickerWithHeading(heading: '시작일'),
-                          DataPickerWithHeading(heading: '종료일')
+                          DataPickerWithHeading(heading: '시작일', dayBuffer: 0),
+                          DataPickerWithHeading(heading: '종료일', dayBuffer: 1)
                         ]),
                     ToggleSwitchWithHeading(
                         heading: '공개여부',
@@ -99,16 +98,10 @@ class _NewPromisePageState extends State<NewPromisePage> {
                         controller.onConfirm(Promise(
                             controller.nameEditingController.text,
                             controller.rewardEditingController.text,
-                            DateTime.now(),
-                            DateTime.now().add(Duration(days: 30)),
-                            DayBased(
-                                'Once a week',
-                                DateTime.now(),
-                                DateTime.now().add(
-                                  Duration(days: 30),
-                                ),
-                                0,
-                                false), //금주 or 절주
+                            controller.from,
+                            controller.to,
+                            DayBased('Once a week', controller.from,
+                                controller.to, 0, false), //금주 or 절주
                             controller.isPublic
                                 ? LevelOfAccess.public
                                 : LevelOfAccess.private, //공개 여부

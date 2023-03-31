@@ -6,23 +6,14 @@ import 'package:get/get.dart';
 import 'package:alcohol_free/app/utils/widget_layout_data.dart';
 import 'package:alcohol_free/app/utils/screen_size.dart';
 
-class PromisePage extends StatelessWidget {
-  const PromisePage({Key? key}) : super(key: key);
+class PromisePage extends StatefulWidget {
+  const PromisePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return const PromisePageState();
-  }
+  State<PromisePage> createState() => _PromisePageState();
 }
 
-class PromisePageState extends StatefulWidget {
-  const PromisePageState({Key? key}) : super(key: key);
-
-  @override
-  State<PromisePageState> createState() => _PromisePageState();
-}
-
-class _PromisePageState extends State<PromisePageState> {
+class _PromisePageState extends State<PromisePage> {
   final GlobalKey _pageKey = GlobalKey();
 
   Size? size;
@@ -71,7 +62,7 @@ class _PromisePageState extends State<PromisePageState> {
                   Expanded(
                       child: TabBarView(
                     children: [
-                      PromiseTabView(height: widgetSize.height, isMy: true),
+                      PromiseTabView(height: widgetSize.height),
                       FriendTabView(),
                     ],
                   )),
@@ -82,5 +73,3 @@ class _PromisePageState extends State<PromisePageState> {
         ]);
   }
 }
-
-

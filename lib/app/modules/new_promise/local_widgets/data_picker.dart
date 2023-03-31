@@ -1,22 +1,28 @@
+import 'package:alcohol_free/app/modules/new_promise/new_promise_page_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class DataPickerWithHeading extends StatefulWidget {
   final String heading;
-  int? dayBuffer;
+  int dayBuffer = 0;
   DateTime? disableDateTime;
 
   DataPickerWithHeading(
-      {super.key, required this.heading, this.dayBuffer, this.disableDateTime});
+      {super.key,
+      required this.heading,
+      required this.dayBuffer,
+      this.disableDateTime});
 
   @override
   State<DataPickerWithHeading> createState() => _DataPickerWithHeadingState();
 }
 
 class _DataPickerWithHeadingState extends State<DataPickerWithHeading> {
-  DateTime date = DateTime.now();
-
   @override
   Widget build(BuildContext context) {
+    DateTime date = widget.dayBuffer == 0
+        ? Get.find<NewPromisePageController>().from
+        : Get.find<NewPromisePageController>().to;
     return Row(mainAxisSize: MainAxisSize.min, children: [
       Text(widget.heading,
           style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
@@ -25,21 +31,24 @@ class _DataPickerWithHeadingState extends State<DataPickerWithHeading> {
           onPressed: () async {
             final selectedDate = await showDatePicker(
                 context: context,
-                initialDate: date.add(Duration(days: widget.dayBuffer ?? 0)),
-                firstDate: DateTime(2000),
-                lastDate: DateTime.now(),
+                initialDate:
+                    DateTime.now().add(Duration(days: widget.dayBuffer)),
+                firstDate: DateTime.now(),
+                lastDate: DateTime(2030),
                 initialEntryMode: DatePickerEntryMode.calendarOnly,
                 selectableDayPredicate: (date) {
                   if (widget.disableDateTime != null &&
                       date == widget.disableDateTime) {
                     return false;
-                  } else
+                  } else {
                     return true;
+                  }
                 });
             if (selectedDate != null) {
-              setState(() {
-                date = selectedDate;
-              });
+              widget.dayBuffer == 0
+                  ? Get.find<NewPromisePageController>()
+                      .updateFrom(selectedDate)
+                  : Get.find<NewPromisePageController>().updateTo(selectedDate);
             }
           },
           style: ButtonStyle(
