@@ -1,7 +1,6 @@
 import 'package:alcohol_free/app/data/enums/level_of_access.dart';
 import 'package:alcohol_free/app/data/models/day_based_requisite.dart';
 import 'package:alcohol_free/app/data/models/promise.dart';
-import 'package:alcohol_free/app/data/models/requisite.dart';
 import 'package:alcohol_free/app/modules/new_promise/local_widgets/add_friend_button.dart';
 import 'package:alcohol_free/app/modules/new_promise/new_promise_page_controller.dart';
 import 'package:alcohol_free/app/widgets/confirm_button.dart';
