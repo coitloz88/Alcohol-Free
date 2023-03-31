@@ -9,5 +9,8 @@ Let's achieve sobriety with friends
 in terminal
 
 > cd {AlcoholFreeDIR}
+
 > flutter run
+
 > select android emulator
+
