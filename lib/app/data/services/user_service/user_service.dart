@@ -12,7 +12,7 @@ class UserService extends GetxService {
 
   Future<UserService> init() async {
     if (_userRepository.isLoggedIn()) {
-      _user = await _userRepository.readUser();
+      user = await _userRepository.readUser();
     }
     return this;
   }

@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:alcohol_free/app/data/models/alcohol_free_user.dart';
+import 'package:alcohol_free/app/data/models/alcohol_free_user_friend.dart';
+import 'package:alcohol_free/app/data/models/promise.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
@@ -159,5 +161,30 @@ class FirestoreProvider extends GetxService {
       sum += buffer;
     }
     return sum;
+  }
+
+  Future<List<Promise>> getFriendsSharedPromise(String fid) async {
+    String uid = FirebaseAuth.instance.currentUser!.uid;
+    // 친구의 해당 promise
+    CollectionReference promiseCollection =
+        _userCollection.doc(fid).collection('promises');
+
+    List<Promise> promiseList = [];
+    QuerySnapshot? snapshot = await promiseCollection.get();
+
+    for (var promise in snapshot.docs) {
+      var json = promise.data() as Map<String, dynamic>;
+      json['pid'] = promise.id;
+      List<AlcoholFreeUserFriend> friendList = (json['friends']
+              as List<dynamic>)
+          .map((e) => AlcoholFreeUserFriend.fromJson(e as Map<String, dynamic>))
+          .toList();
+
+      friendList.where((friend) => friend.uid == uid).toList();
+      if (friendList.isNotEmpty) {
+        promiseList.add(Promise.fromJson(json));
+      }
+    }
+    return promiseList;
   }
 }

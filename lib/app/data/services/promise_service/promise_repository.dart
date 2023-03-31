@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:alcohol_free/app/data/models/promise.dart';
 import 'package:alcohol_free/app/data/providers/firebase_auth_provider.dart';
 import 'package:alcohol_free/app/data/providers/firestore_provider.dart';
@@ -30,5 +32,17 @@ class PromiseRepository {
   Future<int> getSumOfSupports() async {
     var sum = await _dbProvider.getSumOfSupports();
     return sum;
+  }
+
+  Future getFriendsPromiseList() async {
+    List<Map<String, dynamic>> friendJsonList =
+        await _dbProvider.readFriendList();
+
+    List<Promise>? promiseList = [];
+    for (var friendJson in friendJsonList) {
+      promiseList =
+          await _dbProvider.getFriendsSharedPromise(friendJson['uid']);
+    }
+    return promiseList;
   }
 }

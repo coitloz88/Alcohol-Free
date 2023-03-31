@@ -10,14 +10,18 @@ class PromiseService extends GetxService {
 
   List<Promise> _promiseList = [];
   int _sumOfSupports = 0;
+  List<Promise> _sharedPromiseList = [];
 
   List<Promise> get promiseList => _promiseList;
   int get sumOfSupports => _sumOfSupports;
+
+  List<Promise> get sharedPromiseList => _sharedPromiseList;
 
   Future<PromiseService> init() async {
     if (_promiseRepository.isLoggedIn()) {
       _promiseList = await _promiseRepository.readPromiseList();
       _sumOfSupports = await _promiseRepository.getSumOfSupports();
+      _sharedPromiseList = await _promiseRepository.getFriendsPromiseList();
       updatePromiseListCompletionStatus();
     }
     return this;

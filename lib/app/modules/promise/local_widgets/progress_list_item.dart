@@ -63,11 +63,8 @@ class _ProgressListItemViewState extends State<ProgressListItemView> {
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(Icons.emoji_events,
-                            size: 16, color: Color(0xFFFF6B00)),
-                        SizedBox(width: 8),
-                        Text(widget.promise.reward,
-                            style: TextStyle(color: Color(0xFFFF6B00)))
+                        Icon(Icons.emoji_events, size: 16),
+                        Text(widget.promise.memo)
                       ],
                     ),
                     Align(
@@ -106,6 +103,18 @@ class _ProgressListItemViewState extends State<ProgressListItemView> {
                 Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
+                    Container(
+                      width: 44,
+                      height: 44,
+                      clipBehavior: Clip.antiAlias,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                      ),
+                      child: Image.network(
+                        'https://picsum.photos/seed/342/600',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                     Container(
                       width: 44,
                       height: 44,
