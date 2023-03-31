@@ -158,7 +158,7 @@ class _FriendListItemViewState extends State<FriendListItemView> {
     Fluttertoast.showToast(
       msg: "'${promise.name}' 목표에 응원을 보냈습니다.",
       gravity: ToastGravity.BOTTOM,
-      toastLength: Toast.LENGTH_SHORT,
+      toastLength: Toast.LENGTH_LONG,
       textColor: Colors.white,
       backgroundColor: Color(0xff747474),
     );
