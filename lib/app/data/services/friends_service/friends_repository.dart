@@ -54,6 +54,7 @@ class FriendsRepository {
     var encourage = await _dbProvider.createEncourage(uid, pid);
     return encourage;
   }
+
 /*
   Future suggestPromise(String uid, Promise promise) async {
     var promise = await _dbProvider.suggestPromise(uid, promise);

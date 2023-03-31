@@ -10,8 +10,7 @@ class DrinkingJournalPageController extends GetxController {
   final List<bool> _selectedDrinkState = <bool>[false, false, false];
   int _numberOfAlcohol = 1;
   MoodTypeWrapper moodTypeWrapper = MoodTypeWrapper();
-  TextEditingController moneyEditingController = TextEditingController();
-  TextEditingController memoEditingController = TextEditingController();
+  TextEditingController textEditingController = TextEditingController();
 
   int get numberOfPerson => _numberOfPerson;
   List<bool> get selectedDrinkState => _selectedDrinkState;
