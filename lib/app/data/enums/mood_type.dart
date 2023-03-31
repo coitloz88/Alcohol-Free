@@ -13,6 +13,11 @@ enum MoodType {
     return values.firstWhere((element) => element.iconPath == path);
   }
 
+  @override
+  String toString() {
+    return iconPath;
+  }
+
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
       'icon': iconPath,

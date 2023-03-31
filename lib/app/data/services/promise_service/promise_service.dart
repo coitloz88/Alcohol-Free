@@ -9,21 +9,38 @@ class PromiseService extends GetxService {
   final PromiseRepository _promiseRepository = PromiseRepository();
 
   List<Promise> _promiseList = [];
+  int _sumOfSupports = 0;
 
   List<Promise> get promiseList => _promiseList;
+  int get sumOfSupports => _sumOfSupports;
 
   Future<PromiseService> init() async {
     if (_promiseRepository.isLoggedIn()) {
       _promiseList = await _promiseRepository.readPromiseList();
+      _sumOfSupports = await _promiseRepository.getSumOfSupports();
       updatePromiseListCompletionStatus();
     }
     return this;
   }
 
-  Future<Promise> createPromise(
-      name, from, to, requisite, levelOfAccess, memo, friends) async {
-    Promise promise =
-        Promise(name, from, to, requisite, levelOfAccess, memo, friends, 0);
+  //1. promiseList를 순회하면서, 해당 listItem의 friend 리스트 길이가 0인 것만 filtering 해서 promistList를 반환하는 함수
+  //2. promiseList를 순회하면서, listItem의 friend 리스트 길이가 1 이상인 것만 filtering 해서 promiseList를 반환하는 함수
+
+  List<Promise> getAlonePromiseList() {
+    return _promiseList
+        .where((promise) =>
+            promise.friends != null ? promise.friends?.length == 0 : false)
+        .toList();
+  }
+
+  List<Promise> getWithPromiseList() {
+    return _promiseList
+        .where((promise) =>
+            promise.friends != null ? promise.friends?.length != 0 : false)
+        .toList();
+  }
+
+  Future<Promise> createPromise(Promise promise) async {
     promise.pid = await _promiseRepository.createPromise(promise);
     _promiseList.add(promise);
     return promise;
@@ -31,7 +48,8 @@ class PromiseService extends GetxService {
 
   void updatePromiseListCompletionStatus() {
     for (Promise promise in _promiseList) {
-      List<Journal> journalWithinPeriod = JournalService.to.getJournalListWithinThePeriod(promise.from, promise.to);
+      List<Journal> journalWithinPeriod = JournalService.to
+          .getJournalListWithinThePeriod(promise.from, promise.to);
       promise.requisite.updateCompletionStatus(journalWithinPeriod);
     }
   }

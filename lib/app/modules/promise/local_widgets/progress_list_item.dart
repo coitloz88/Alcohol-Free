@@ -40,7 +40,7 @@ class _ProgressListItemViewState extends State<ProgressListItemView> {
                 Align(
                   alignment: AlignmentDirectional(0, 0),
                   child: Text(
-                    '${widget.promise.from}~${widget.promise.to}',
+                    '${widget.promise.from.year.toString()}-${widget.promise.from.month.toString().padLeft(2, '0')}-${widget.promise.from.day.toString().padLeft(2, '0')}~${widget.promise.to.year.toString()}-${widget.promise.to.month.toString().padLeft(2, '0')}-${widget.promise.to.day.toString().padLeft(2, '0')}',
                     style: TextStyle(fontSize: 12),
                   ),
                 ),
@@ -60,6 +60,16 @@ class _ProgressListItemViewState extends State<ProgressListItemView> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.emoji_events,
+                            size: 16, color: Color(0xFFFF6B00)),
+                        SizedBox(width: 8),
+                        Text(widget.promise.reward,
+                            style: TextStyle(color: Color(0xFFFF6B00)))
+                      ],
+                    ),
                     Align(
                       alignment: AlignmentDirectional(-1, 0),
                       child: Text(
@@ -88,25 +98,14 @@ class _ProgressListItemViewState extends State<ProgressListItemView> {
                       color: Color(0xFFFFAC30),
                       size: 12,
                     ),
-                    Text(' ${widget.promise.friends.length}',
+                    Text(
+                        ' ${widget.promise.friends != null ? widget.promise.friends?.length : 0}',
                         style: TextStyle(fontSize: 12)),
                   ],
                 ),
                 Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Container(
-                      width: 44,
-                      height: 44,
-                      clipBehavior: Clip.antiAlias,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                      ),
-                      child: Image.network(
-                        'https://picsum.photos/seed/342/600',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
                     Container(
                       width: 44,
                       height: 44,

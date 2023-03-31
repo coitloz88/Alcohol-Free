@@ -1,3 +1,5 @@
+import 'package:alcohol_free/app/modules/new_promise/new_promise_page.dart';
+import 'package:alcohol_free/app/modules/new_promise/new_promise_page_controller.dart';
 import 'package:alcohol_free/app/modules/promise/local_widgets/promise_view.dart';
 import 'package:alcohol_free/app/modules/promise/promise_page_controller.dart';
 import 'package:flutter/material.dart';
@@ -6,8 +8,8 @@ import 'package:alcohol_free/app/modules/promise/local_widgets/promise_sort_opti
 import 'package:alcohol_free/app/utils/widget_layout_data.dart';
 import 'package:alcohol_free/app/utils/screen_size.dart';
 
-class PromisePageView extends StatelessWidget {
-  const PromisePageView({Key? key}) : super(key: key);
+class PromisePage extends StatelessWidget {
+  const PromisePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,7 @@ class _PromisePageState extends State<PromisePageState> {
   void initState() {
     super.initState();
 
-    Get.put(PromisePageViewController());
+    Get.put(PromisePageController());
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       setState(() {
@@ -71,8 +73,8 @@ class _PromisePageState extends State<PromisePageState> {
                   Expanded(
                       child: TabBarView(
                     children: [
-                      PromiseTabView(height: widgetSize.height),
-                      PromiseTabView(height: widgetSize.height)
+                      PromiseTabView(height: widgetSize.height, isMy: true),
+                      PromiseTabView(height: widgetSize.height, isMy: false)
                     ],
                   )),
                 ],
@@ -83,20 +85,50 @@ class _PromisePageState extends State<PromisePageState> {
   }
 }
 
-class PromiseTabView extends StatelessWidget {
+class PromiseTabView extends StatefulWidget {
   final double height;
+  final bool isMy;
 
-  const PromiseTabView({Key? key, required this.height}) : super(key: key);
+  const PromiseTabView({Key? key, required this.height, required this.isMy})
+      : super(key: key);
 
   @override
+  State<PromiseTabView> createState() => _PromiseTabViewState();
+}
+
+class _PromiseTabViewState extends State<PromiseTabView> {
+  @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      mainAxisSize: MainAxisSize.max,
+    return Stack(
+      alignment: Alignment.bottomRight,
       children: [
-        const PromiseSortOptionContainer(),
-        PromiseListView(listViewHeight: height),
-        PromiseListView(listViewHeight: height)
+        Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            const PromiseSortOptionContainer(),
+            PromiseListView(listViewHeight: widget.height, isAlone: true),
+            PromiseListView(listViewHeight: widget.height, isAlone: false),
+          ],
+        ),
+        if (widget.isMy)
+          Padding(
+              padding: EdgeInsets.all(20),
+              child: FloatingActionButton(
+                  backgroundColor: Color(0xfff3f3f3),
+                  onPressed: () async {
+                    final int confirmResult = await Get.to(NewPromisePage(),
+                        binding: BindingsBuilder(() {
+                      Get.put(NewPromisePageController());
+                    }));
+                    if (confirmResult == 1) {
+                      setState(() {});
+                    }
+                  },
+                  child: const Icon(
+                    Icons.add,
+                    color: Colors.black,
+                  )))
       ],
     );
   }

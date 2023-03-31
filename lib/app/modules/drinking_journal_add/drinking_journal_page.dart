@@ -46,9 +46,10 @@ class _DrinkingJournalPageState extends State<DrinkingJournalPage> {
           body: SingleChildScrollView(
             child: Padding(
                 padding: EdgeInsetsDirectional.all(20),
-                child: Column(
+                child: Wrap(
+                  runSpacing: 12,
                   children: [
-                    MoodSelectionRow(),
+                    MoodSelectionRow(controller.moodTypeWrapper),
                     WidgetWithLeftHeading(
                         heading: '오늘은 무슨 일로 마시게 되었나요?',
                         childWidget: AFreeDropDownButton(
@@ -109,14 +110,15 @@ class _DrinkingJournalPageState extends State<DrinkingJournalPage> {
                         )),
                     WidgetWithLeftHeading(
                         heading: '취함의 정도',
-                        childWidget: ToggleButtons(
+                        childWidget: Center(
+                            child: ToggleButtons(
                           children: [Text('멀쩡해요'), Text('적당해요'), Text('만취했어요')],
                           isSelected: controller.selectedDrinkState,
                           fillColor: Color(0xFFFFAC30),
                           constraints:
                               BoxConstraints(minHeight: 44, minWidth: 100),
                           onPressed: controller.updateSelectedDrinkState,
-                        )),
+                        ))),
                     WidgetWithLeftHeading(
                         heading: '술 종류',
                         childWidget:
@@ -166,9 +168,17 @@ class _DrinkingJournalPageState extends State<DrinkingJournalPage> {
                       heading: '돈 얼마 썼는지',
                       height: 44,
                       suffixText: '원',
+                      textEditingController: controller.moneyEditingController,
                     ),
-                    TextBoxWithHeading(heading: '메모', height: 70),
-                    ConfirmButton(buttonText: '저장하기')
+                    TextBoxWithHeading(
+                      heading: '메모',
+                      height: 70,
+                      textEditingController: controller.memoEditingController,
+                    ),
+                    ConfirmButton(
+                      buttonText: '저장하기',
+                      onPressed: () => Get.back(),
+                    )
                   ],
                 )),
           ));

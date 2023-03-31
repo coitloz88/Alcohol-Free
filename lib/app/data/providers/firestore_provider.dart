@@ -141,4 +141,23 @@ class FirestoreProvider extends GetxService {
 
     return userJsonList;
   }
+
+  Future<int> getSumOfSupports() async {
+    String uid = FirebaseAuth.instance.currentUser!.uid;
+
+    CollectionReference promiseCollection =
+        _userCollection.doc(uid).collection('promises');
+
+    QuerySnapshot? snapshot = await promiseCollection.get();
+    int sum = 0;
+    for (var element in snapshot.docs) {
+      var json = element.data() as Map<String, dynamic>;
+      int buffer = 0;
+      if (json['support'] != null) {
+        buffer = json['support'] as int;
+      }
+      sum += buffer;
+    }
+    return sum;
+  }
 }
