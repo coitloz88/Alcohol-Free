@@ -1,8 +1,23 @@
+import 'package:alcohol_free/app/data/models/journal.dart';
+import 'package:alcohol_free/app/data/services/journal_service/journal_service.dart';
+import 'package:alcohol_free/app/modules/calendar/calendar_page_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_timeline_calendar/timeline/flutter_timeline_calendar.dart';
+import 'package:get/get.dart';
 
-class MonthCalendarView extends StatelessWidget {
+class MonthCalendarView extends StatefulWidget {
   const MonthCalendarView({super.key});
+
+  @override
+  State<MonthCalendarView> createState() => _MonthCalendarViewState();
+}
+
+class _MonthCalendarViewState extends State<MonthCalendarView> {
+  @override
+  void initState() {
+    super.initState();
+    CalendarPageController.to.onInit();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +38,9 @@ class MonthCalendarContainer extends StatelessWidget {
     return TimelineCalendar(
       calendarType: CalendarType.GREGORIAN,
       calendarLanguage: "en",
+      onChangeDateTime: (dateTime) {
+        var journal = CalendarPageController.to.getJournal(dateTime);
+      },
       headerOptions: HeaderOptions(
           weekDayStringType: WeekDayStringTypes.SHORT,
           monthStringType: MonthStringTypes.SHORT),
