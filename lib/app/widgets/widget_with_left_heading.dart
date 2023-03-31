@@ -24,7 +24,7 @@ class _WidgetWithLeftHeadingState extends State<WidgetWithLeftHeading> {
       children: [
         Text(widget.heading,
             style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
-        const SizedBox(height: 3),
+        const SizedBox(height: 8),
         widget.childWidget,
       ],
     );

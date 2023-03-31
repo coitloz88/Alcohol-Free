@@ -7,11 +7,11 @@ import 'package:get/get.dart';
 class CalendarPageController extends GetxController {
   static CalendarPageController get to => Get.find<CalendarPageController>();
   Journal? _journal;
-  List<DateTime>? _dateTimeList;
+  CalendarDateTime? _dateTime;
 
   Journal? get journal => _journal;
 
-  List<DateTime>? get dateTimeList => _dateTimeList;
+  CalendarDateTime? get dateTime => _dateTime;
 
   List<Journal> getJournalList() {
     return JournalService.to.journalList;
@@ -26,6 +26,11 @@ class CalendarPageController extends GetxController {
     update();
   }
 
+  void setDate(CalendarDateTime time) {
+    _dateTime = time;
+    update();
+  }
+
   Journal? getJournal(CalendarDateTime time) {
     var check = 0;
     for (var journal in JournalService.to.journalList) {
@@ -34,7 +39,6 @@ class CalendarPageController extends GetxController {
           time.day == journal.date.day) {
         _journal = journal;
         check = 1;
-        _dateTimeList?.add(journal.date);
 
         update();
         return journal;
