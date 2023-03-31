@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 
 class PromisePageController extends GetxController {
   List<Promise> getPromiseList(bool isAlone) {
-    log(PromiseService.to.promiseList.toString());
     if (isAlone)
       return PromiseService.to.getAlonePromiseList();
     else
