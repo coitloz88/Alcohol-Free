@@ -1,5 +1,6 @@
 import 'package:alcohol_free/app/data/providers/firebase_auth_provider.dart';
 import 'package:alcohol_free/app/data/providers/firestore_provider.dart';
+import 'package:alcohol_free/app/data/services/friends_service/friends_service.dart';
 import 'package:alcohol_free/app/data/services/journal_service/journal_service.dart';
 import 'package:alcohol_free/app/data/services/notification_service/notification_service.dart';
 import 'package:alcohol_free/app/data/services/auth_service/auth_service.dart';
@@ -28,4 +29,5 @@ Future<void> initializeServices() async {
   await Get.putAsync(() async => UserService().init());
   await Get.putAsync(() async => JournalService().init());
   await Get.putAsync(() async => PromiseService().init());
+  await Get.putAsync(() async => FriendsService().init());
 }

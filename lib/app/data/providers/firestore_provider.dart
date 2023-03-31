@@ -39,6 +39,22 @@ class FirestoreProvider extends GetxService {
     return promiseJsonList;
   }
 
+  Future<List<Map<String, dynamic>>> readFriendsPromiseList(String uid) async {
+    CollectionReference promiseCollection =
+    _userCollection.doc(uid).collection('promises');
+
+    QuerySnapshot? snapshot = await promiseCollection.get();
+
+    var promiseJsonList = snapshot.docs.map((promise) {
+      var json = promise.data() as Map<String, dynamic>;
+      json['pid'] = promise.id;
+      return json;
+    }).toList();
+
+    return promiseJsonList;
+  }
+
+
   Future<List<Map<String, dynamic>>> readJournalList() async {
     String uid = FirebaseAuth.instance.currentUser!.uid;
 
@@ -175,6 +191,8 @@ class FirestoreProvider extends GetxService {
     for (var promise in snapshot.docs) {
       var json = promise.data() as Map<String, dynamic>;
       json['pid'] = promise.id;
+      print(fid);
+      print(json['friends']);
       List<AlcoholFreeUserFriend> friendList = (json['friends']
               as List<dynamic>)
           .map((e) => AlcoholFreeUserFriend.fromJson(e as Map<String, dynamic>))
