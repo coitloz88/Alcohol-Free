@@ -49,8 +49,9 @@ class DrinkingJournal implements Journal {
 
   factory DrinkingJournal.fromJson(Map<String, dynamic> json) {
     // journal 종류 받기
-    List<String> friends =
-        (json['friends'] as List<dynamic>).map((e) => e.toString()).toList();
+    List<String>? friends = json['friends'] != null
+        ? (json['friends'] as List<dynamic>).map((e) => e.toString()).toList()
+        : [];
 
     DrinkingJournal journal = DrinkingJournal(
       (json['date'] as Timestamp).toDate(),

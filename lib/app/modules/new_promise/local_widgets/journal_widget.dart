@@ -111,14 +111,22 @@ class _JournalWidgetState extends State<JournalWidget> {
                           ],
                         ),
                       if (!isSobriety)
-                        Column(
-                          children: [
-                            Text("* 친구 ${drinking?.friends?.length}명과 약속"),
-                            Text(
-                                "* ${drinking?.levelOfBeingDrunk?.toKorean()}"),
-                            Text(
-                                "* ${drinking?.alcohol?.name} ${drinking?.howMany}${drinking?.alcohol?.alcoholContentPerUnit}")
-                          ],
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              if (drinking?.friends?.length != 0)
+                                Text("• 친구 ${drinking?.friends?.length}명과 약속"),
+                              Text(
+                                  "• ${DateFormat("HH:mm").format(drinking!.from!)} 부터 ${DateFormat("HH:mm").format(drinking!.to!)}까지 마심"),
+                              Text(
+                                  "• ${drinking?.levelOfBeingDrunk?.toKorean()}"),
+                              Text(
+                                  "• ${drinking?.alcohol?.name} ${drinking?.howMany}${drinking?.alcohol?.alcoholContentPerUnit}"),
+                              Text("• ${drinking?.expense}원 지출")
+                            ],
+                          ),
                         ),
                     ],
                   ),
