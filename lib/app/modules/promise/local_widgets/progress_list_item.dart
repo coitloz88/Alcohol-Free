@@ -63,8 +63,11 @@ class _ProgressListItemViewState extends State<ProgressListItemView> {
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(Icons.emoji_events, size: 16),
-                        Text(widget.promise.memo)
+                        Icon(Icons.emoji_events,
+                            size: 16, color: Color(0xFFFF6B00)),
+                        SizedBox(width: 8),
+                        Text(widget.promise.reward,
+                            style: TextStyle(color: Color(0xFFFF6B00)))
                       ],
                     ),
                     Align(

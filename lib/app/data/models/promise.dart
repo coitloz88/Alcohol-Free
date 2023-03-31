@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Promise {
   String name;
+  String reward;
   DateTime from, to;
   Requisite requisite;
   LevelOfAccess levelOfAccess;
@@ -16,8 +17,8 @@ class Promise {
 
   late String pid;
 
-  Promise(this.name, this.from, this.to, this.requisite, this.levelOfAccess,
-      this.memo, this.friends, this.count);
+  Promise(this.name, this.reward, this.from, this.to, this.requisite,
+      this.levelOfAccess, this.memo, this.friends, this.count);
 
   factory Promise.fromJson(Map<String, dynamic> json) {
     List<AlcoholFreeUserFriend>? friends = json['friends'] != null
@@ -29,6 +30,7 @@ class Promise {
 
     Promise promise = Promise(
         json['name'] as String,
+        json['reward'] as String,
         (json['from'] as Timestamp).toDate(),
         (json['to'] as Timestamp).toDate(),
         Requisite.fromJson(json['requisite']),
@@ -45,6 +47,7 @@ class Promise {
 
     return <String, dynamic>{
       'name': name,
+      'reward': reward,
       'from': from,
       'to': to,
       'requisite': requisite.toJson(),

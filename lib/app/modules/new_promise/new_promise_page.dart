@@ -60,8 +60,8 @@ class _NewPromisePageState extends State<NewPromisePage> {
                       textEditingController: controller.nameEditingController,
                     ),
                     TextBoxWithHeading(
-                      heading: '메모',
-                      height: 70,
+                      heading: '보상',
+                      height: 44,
                       textEditingController: controller.rewardEditingController,
                     ),
                     Row(
@@ -98,6 +98,7 @@ class _NewPromisePageState extends State<NewPromisePage> {
                       onPressed: () {
                         controller.onConfirm(Promise(
                             controller.nameEditingController.text,
+                            controller.rewardEditingController.text,
                             DateTime.now(),
                             DateTime.now().add(Duration(days: 30)),
                             DayBased(
