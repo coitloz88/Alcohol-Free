@@ -55,6 +55,20 @@ class FriendsRepository {
     return encourage;
   }
 
+  Future<List<Promise>> readFriendPromiseList(String uid) async {
+    List<Map<String, dynamic>> promiseJsonList =
+    await _dbProvider.readFriendsPromiseList(uid);
+    List<Promise> promiseList = promiseJsonList
+        .map((promiseJson) {
+          return Promise.fromJson(promiseJson)
+              ..pid = promiseJson['pid'] as String;
+        })
+        .toList();
+
+    return promiseList;
+  }
+
+
 /*
   Future suggestPromise(String uid, Promise promise) async {
     var promise = await _dbProvider.suggestPromise(uid, promise);

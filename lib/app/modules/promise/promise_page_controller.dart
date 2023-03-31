@@ -13,4 +13,18 @@ class PromisePageController extends GetxController {
     else
       return PromiseService.to.getWithPromiseList();
   }
+
+  List<AlcoholFreeUserFriend> getFriends() {
+    return FriendsService.to.friendList;
+  }
+
+  Future<List<Promise>> getFriendPromiseList(String uid) {
+    return FriendsService.to.readPromiseList(uid);
+  }
+
+  Future<void> createSupport(String uid, String pid) async {
+    print(uid);
+    print(pid);
+    return FriendsService.to.createSupport(uid, pid);
+  }
 }

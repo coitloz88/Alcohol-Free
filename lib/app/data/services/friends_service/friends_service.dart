@@ -38,6 +38,10 @@ class FriendsService extends GetxService {
     return promiseList;
   }
 
+  Future<List<Promise>> readPromiseList(String uid) async {
+    return await _friendsRepository.readFriendPromiseList(uid);
+  }
+
   Future createSupport(uid, pid) async {
     var support = await _friendsRepository.createSupport(uid, pid);
     // support 보내기
