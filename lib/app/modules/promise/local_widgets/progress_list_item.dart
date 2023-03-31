@@ -48,23 +48,32 @@ class _ProgressListItemViewState extends State<ProgressListItemView> {
             ),
             const SizedBox(
               width: double.infinity,
-              height: 20,
+              height: 4,
             ),
             Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Wrap(
+                  direction: Axis.vertical,
+                  alignment: WrapAlignment.center,
+                  crossAxisAlignment: WrapCrossAlignment.start,
+                  runSpacing: 4,
                   children: [
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(Icons.emoji_events, size: 16),
-                        Text(widget.promise.memo)
+                        const Icon(
+                          Icons.emoji_events,
+                          size: 14,
+                          color: Color(0xFFFF6B00),
+                        ),
+                        Text(
+                          ' ${widget.promise.reward}',
+                          style: const TextStyle(
+                              fontSize: 12, color: Color(0xFFFF6B00)),
+                        )
                       ],
                     ),
                     Align(
@@ -87,34 +96,23 @@ class _ProgressListItemViewState extends State<ProgressListItemView> {
                     ),
                   ],
                 ),
+                if (widget.promise.friends != null &&
+                    widget.promise.friends?.length != 0)
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      FaIcon(
+                        FontAwesomeIcons.handshakeAngle,
+                        color: Color(0xFFFFAC30),
+                        size: 12,
+                      ),
+                      Text(' ${widget.promise.friends?.length}',
+                          style: TextStyle(fontSize: 12)),
+                    ],
+                  ),
                 Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    FaIcon(
-                      FontAwesomeIcons.handshakeAngle,
-                      color: Color(0xFFFFAC30),
-                      size: 12,
-                    ),
-                    Text(
-                        ' ${widget.promise.friends != null ? widget.promise.friends?.length : 0}',
-                        style: TextStyle(fontSize: 12)),
-                  ],
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Container(
-                      width: 44,
-                      height: 44,
-                      clipBehavior: Clip.antiAlias,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                      ),
-                      child: Image.network(
-                        'https://picsum.photos/seed/342/600',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
                     Container(
                       width: 44,
                       height: 44,
@@ -123,7 +121,7 @@ class _ProgressListItemViewState extends State<ProgressListItemView> {
                         shape: BoxShape.circle,
                       ),
                       child: Image.asset(
-                        'assets/images/empty_profile.png',
+                        'assets/images/empty_profile_circle.png',
                         fit: BoxFit.cover,
                       ),
                     ),
