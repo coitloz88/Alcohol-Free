@@ -29,36 +29,33 @@ class TextBoxWithHeading extends StatefulWidget {
 class _TextBoxWithHeadingState extends State<TextBoxWithHeading> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 30.0),
-      child: WidgetWithLeftHeading(
-          heading: widget.heading,
-          childWidget: Container(
-            constraints: BoxConstraints(
-              minHeight:
-                  widget.minHeight != null ? widget.minHeight! : widget.height,
-              maxHeight:
-                  widget.maxHeight != null ? widget.maxHeight! : widget.height,
-            ),
-            decoration: BoxDecoration(
-              color: const Color(0x25686767),
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: TextFormField(
-              maxLines: null,
-              expands: true,
-              controller: widget.textEditingController,
-              decoration: InputDecoration(
-                  hintText: widget.hint,
-                  contentPadding: const EdgeInsets.only(
-                    left: 16.0,
-                    top: 10,
-                    right: 16,
-                  ),
-                  border: InputBorder.none,
-                  suffixText: widget.suffixText),
-            ),
-          )),
-    );
+    return WidgetWithLeftHeading(
+        heading: widget.heading,
+        childWidget: Container(
+          constraints: BoxConstraints(
+            minHeight:
+                widget.minHeight != null ? widget.minHeight! : widget.height,
+            maxHeight:
+                widget.maxHeight != null ? widget.maxHeight! : widget.height,
+          ),
+          decoration: BoxDecoration(
+            color: const Color(0x25686767),
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: TextFormField(
+            maxLines: null,
+            expands: true,
+            controller: widget.textEditingController,
+            decoration: InputDecoration(
+                hintText: widget.hint,
+                contentPadding: const EdgeInsets.only(
+                  left: 16.0,
+                  top: 16,
+                  right: 16,
+                ),
+                border: InputBorder.none,
+                suffixText: widget.suffixText),
+          ),
+        ));
   }
 }
