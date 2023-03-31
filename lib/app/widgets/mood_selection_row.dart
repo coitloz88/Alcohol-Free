@@ -54,7 +54,6 @@ class _MoodButtonState extends State<MoodButton> {
     return GestureDetector(
       onTap: () {
         widget.moodTypeWrapper.moodType = widget.moodType;
-        print(widget.moodTypeWrapper.moodType);
         setState(() {
           widget.clicked = !widget.clicked;
         });
