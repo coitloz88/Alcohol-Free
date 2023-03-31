@@ -113,18 +113,6 @@ class _ProgressListItemViewState extends State<ProgressListItemView> {
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                       ),
-                      child: Image.network(
-                        'https://picsum.photos/seed/342/600',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    Container(
-                      width: 44,
-                      height: 44,
-                      clipBehavior: Clip.antiAlias,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                      ),
                       child: Image.asset(
                         'assets/images/empty_profile.png',
                         fit: BoxFit.cover,

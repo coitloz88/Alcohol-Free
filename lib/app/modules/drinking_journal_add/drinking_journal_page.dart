@@ -168,16 +168,16 @@ class _DrinkingJournalPageState extends State<DrinkingJournalPage> {
                       heading: '돈 얼마 썼는지',
                       height: 44,
                       suffixText: '원',
-                      textEditingController: controller.textEditingController,
+                      textEditingController: controller.moneyEditingController,
                     ),
                     TextBoxWithHeading(
                       heading: '메모',
                       height: 70,
-                      textEditingController: controller.textEditingController,
+                      textEditingController: controller.memoEditingController,
                     ),
                     ConfirmButton(
                       buttonText: '저장하기',
-                      onPressed: () => print("asdasdasd"),
+                      onPressed: () => Get.back(),
                     )
                   ],
                 )),

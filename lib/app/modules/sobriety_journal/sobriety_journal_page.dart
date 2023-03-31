@@ -16,11 +16,21 @@ class SobrietyJournalPageView extends StatelessWidget {
         init: SobrietyJournalPageController(),
         builder: (controller) {
           return Scaffold(
+            appBar: AppBar(
+                title: Center(
+                    child:
+                        Text('술 안마신 날', style: TextStyle(color: Colors.black))),
+                backgroundColor: Colors.white,
+                leading: BackButton(
+                  color: Colors.black,
+                  onPressed: () {
+                    Get.back();
+                  },
+                )),
             body: Padding(
                 padding: EdgeInsets.all(20.0),
                 child: Column(
                   children: [
-                    JournalHeading("술 안 마신 날"),
                     MoodSelectionRow(controller.moodTypeWrapper),
                     TextBoxWithHeading(
                       textEditingController: controller.textEditingController,

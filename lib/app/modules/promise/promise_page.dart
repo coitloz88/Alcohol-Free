@@ -85,13 +85,18 @@ class _PromisePageState extends State<PromisePageState> {
   }
 }
 
-class PromiseTabView extends StatelessWidget {
+class PromiseTabView extends StatefulWidget {
   final double height;
   final bool isMy;
 
   const PromiseTabView({Key? key, required this.height, required this.isMy})
       : super(key: key);
 
+  @override
+  State<PromiseTabView> createState() => _PromiseTabViewState();
+}
+
+class _PromiseTabViewState extends State<PromiseTabView> {
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -102,19 +107,23 @@ class PromiseTabView extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           children: [
             const PromiseSortOptionContainer(),
-            PromiseListView(listViewHeight: height, isAlone: true),
-            PromiseListView(listViewHeight: height, isAlone: false),
+            PromiseListView(listViewHeight: widget.height, isAlone: true),
+            PromiseListView(listViewHeight: widget.height, isAlone: false),
           ],
         ),
-        if (isMy)
+        if (widget.isMy)
           Padding(
               padding: EdgeInsets.all(20),
               child: FloatingActionButton(
                   backgroundColor: Color(0xfff3f3f3),
-                  onPressed: () {
-                    Get.to(NewPromisePage(), binding: BindingsBuilder(() {
+                  onPressed: () async {
+                    final int confirmResult = await Get.to(NewPromisePage(),
+                        binding: BindingsBuilder(() {
                       Get.put(NewPromisePageController());
                     }));
+                    if (confirmResult == 1) {
+                      setState(() {});
+                    }
                   },
                   child: const Icon(
                     Icons.add,

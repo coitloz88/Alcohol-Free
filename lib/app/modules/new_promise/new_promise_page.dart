@@ -102,7 +102,7 @@ class _NewPromisePageState extends State<NewPromisePage> {
                             DateTime.now(),
                             DateTime.now().add(Duration(days: 30)),
                             DayBased(
-                                '주 1회만 마시기',
+                                'Once a week',
                                 DateTime.now(),
                                 DateTime.now().add(
                                   Duration(days: 30),
@@ -115,7 +115,7 @@ class _NewPromisePageState extends State<NewPromisePage> {
                             controller.memoEditingController.text,
                             controller.selectedFriends,
                             0));
-                        Get.back();
+                        Get.back(result: 1);
                       },
                     )
                   ],
