@@ -39,7 +39,8 @@ class MonthCalendarContainer extends StatelessWidget {
       calendarType: CalendarType.GREGORIAN,
       calendarLanguage: "en",
       onChangeDateTime: (dateTime) {
-        var journal = CalendarPageController.to.getJournal(dateTime);
+        CalendarPageController.to.getJournal(dateTime);
+        CalendarPageController.to.setDate(dateTime);
       },
       headerOptions: HeaderOptions(
           weekDayStringType: WeekDayStringTypes.SHORT,

@@ -104,7 +104,8 @@ class _NewPromisePageState extends State<NewPromisePage> {
                                 controller.to, 0, false), //금주 or 절주
                             controller.isPublic
                                 ? LevelOfAccess.public
-                                : LevelOfAccess.private, //공개 여부
+                                : LevelOfAccess.private,
+                            //공개 여부
                             controller.memoEditingController.text,
                             controller.selectedFriends,
                             0));
