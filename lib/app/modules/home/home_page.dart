@@ -8,8 +8,9 @@ class HomePageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+    return SingleChildScrollView(
+        child: Padding(
+      padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 20),
       child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -20,6 +21,6 @@ class HomePageView extends StatelessWidget {
             const SizedBox(height: 30),
             CurrentPromiseView(),
           ]),
-    );
+    ));
   }
 }

@@ -38,7 +38,7 @@ class CurrentPromiseListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        width: 460, //TODO: 화면 크기 기준으로
+        width: MediaQuery.of(context).size.width - 20 * 2, //TODO: 화면 크기 기준으로
         height: 241,
         child: ListView.separated(
           shrinkWrap: true,

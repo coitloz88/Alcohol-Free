@@ -55,10 +55,11 @@ class FriendsService extends GetxService {
   }
 
 // promise 제안하기
-/*
-  Future suggestPromise(uid, promise) async {
-    var promise = await _friendsRepository.suggestPromise(uid, promise);
-    return promise;
+
+  Future suggestPromise(uid, pid) async {
+    print('TODO: suggest promise..');
+    print('uid: $uid, pid: ${pid}');
+    // var promise = await _friendsRepository.suggestPromise(uid, promise);
+    // return promise;
   }
-   */
 }

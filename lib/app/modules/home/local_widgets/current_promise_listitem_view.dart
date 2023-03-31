@@ -35,7 +35,10 @@ class CurrentPromiseCardContainer extends StatelessWidget {
           alignment: WrapAlignment.spaceBetween,
           spacing: 8,
           children: [
-            Text('${promise.name}'),
+            Text(
+              '${promise.name}',
+              overflow: TextOverflow.ellipsis,
+            ),
             promise.levelOfAccess.name == LevelOfAccess.public
                 ? const Icon(Icons.lock_open, size: 16)
                 : const Icon(Icons.lock, size: 16),

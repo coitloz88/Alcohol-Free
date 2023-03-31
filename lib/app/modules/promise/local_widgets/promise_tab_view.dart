@@ -7,10 +7,8 @@ import 'package:get/get.dart';
 
 class PromiseTabView extends StatelessWidget {
   final double height;
-  final bool isMy;
 
-  const PromiseTabView({Key? key, required this.height, required this.isMy})
-      : super(key: key);
+  const PromiseTabView({Key? key, required this.height}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,24 +20,42 @@ class PromiseTabView extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           children: [
             const PromiseSortOptionContainer(),
+            const Padding(
+                padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                child: Align(
+                  alignment: AlignmentDirectional(-1, -1),
+                  child: Text(
+                    '혼자 하는 약속',
+                    style: TextStyle(fontWeight: FontWeight.w600),
+                  ),
+                )),
             PromiseListView(listViewHeight: height, isAlone: true),
+            const SizedBox(height: 10),
+            const Padding(
+                padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                child: Align(
+                  alignment: AlignmentDirectional(-1, -1),
+                  child: Text(
+                    '함께 하는 약속',
+                    style: TextStyle(fontWeight: FontWeight.w600),
+                  ),
+                )),
             PromiseListView(listViewHeight: height, isAlone: false),
           ],
         ),
-        if (isMy)
-          Padding(
-              padding: EdgeInsets.all(20),
-              child: FloatingActionButton(
-                  backgroundColor: Color(0xfff3f3f3),
-                  onPressed: () {
-                    Get.to(NewPromisePage(), binding: BindingsBuilder(() {
-                      Get.put(NewPromisePageController());
-                    }));
-                  },
-                  child: const Icon(
-                    Icons.add,
-                    color: Colors.black,
-                  )))
+        Padding(
+            padding: EdgeInsets.all(20),
+            child: FloatingActionButton(
+                backgroundColor: Color(0xfff3f3f3),
+                onPressed: () {
+                  Get.to(const NewPromisePage(), binding: BindingsBuilder(() {
+                    Get.put(NewPromisePageController());
+                  }));
+                },
+                child: const Icon(
+                  Icons.add,
+                  color: Colors.black,
+                )))
       ],
     );
   }
