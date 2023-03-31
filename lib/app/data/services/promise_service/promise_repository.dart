@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:alcohol_free/app/data/models/promise.dart';
 import 'package:alcohol_free/app/data/providers/firebase_auth_provider.dart';
 import 'package:alcohol_free/app/data/providers/firestore_provider.dart';
