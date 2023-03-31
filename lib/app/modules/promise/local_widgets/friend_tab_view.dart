@@ -3,8 +3,7 @@ import 'package:alcohol_free/app/modules/promise/local_widgets/promise_sort_opti
 import 'package:flutter/material.dart';
 
 class FriendTabView extends StatelessWidget {
-  const FriendTabView({Key? key})
-      : super(key: key);
+  const FriendTabView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

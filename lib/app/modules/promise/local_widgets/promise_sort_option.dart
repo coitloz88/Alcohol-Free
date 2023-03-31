@@ -7,12 +7,12 @@ class PromiseSortOptionContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return const SizedBox(
       width: double.infinity,
-      height: 24,
+      height: 40,
       child: Align(
         alignment: AlignmentDirectional(1, 0),
         child: TextButton(
             onPressed: null,
-            child: SizedBox(height: 24, width: 100, child: Text('최신순 ▼'))),
+            child: SizedBox(height: 24, width: 80, child: Text('최신순 ▼'))),
       ),
     );
   }
