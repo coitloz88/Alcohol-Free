@@ -43,6 +43,8 @@ class DayBased extends Requisite {
     }
 
     ratio = notDrunkenDays / totalDays;
+    ratio = ratio < 0 ? 0 : ratio;
+
     isCompleted = notDrunkenDays == totalDays ? true : false;
   }
 }

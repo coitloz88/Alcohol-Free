@@ -44,6 +44,8 @@ class ConsumptionBased extends Requisite {
     }
 
     ratio = totalAlcoholConsumption / targetAlcoholConsumption;
+    ratio = ratio < 0 ? 0 : ratio;
+
     isCompleted = ratio > 1 ? false : true;
   }
 }
