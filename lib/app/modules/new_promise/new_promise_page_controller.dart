@@ -6,6 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class NewPromisePageController extends GetxController {
+  static NewPromisePageController get to =>
+      Get.find<NewPromisePageController>();
+
   DateTime _from = DateTime.now();
   DateTime _to = DateTime.now();
   bool _isPublic = false;
@@ -18,9 +21,13 @@ class NewPromisePageController extends GetxController {
   TextEditingController memoEditingController = TextEditingController();
 
   DateTime get from => _from;
-  DateTime get to => _to;
+
+  DateTime get timeTo => _to;
+
   bool get isPublic => _isPublic;
+
   bool get isNotification => _isNotification;
+
   List<AlcoholFreeUserFriend> get selectedFriends => _selectedFriends;
 
   void updateIsPublic(bool newIsPublic) {
@@ -56,6 +63,7 @@ class NewPromisePageController extends GetxController {
     } else {
       _selectedFriends.removeAt(listIndex);
     }
+    update();
   }
 
   Future<void> suggestPromise(String uid, String pid) async {

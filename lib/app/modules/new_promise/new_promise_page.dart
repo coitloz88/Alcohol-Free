@@ -10,6 +10,7 @@ import 'package:alcohol_free/app/widgets/toggle_switch_with_heading.dart';
 import 'package:alcohol_free/app/widgets/widget_with_left_heading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 class NewPromisePage extends StatefulWidget {
@@ -99,9 +100,10 @@ class _NewPromisePageState extends State<NewPromisePage> {
                             controller.nameEditingController.text,
                             controller.rewardEditingController.text,
                             controller.from,
-                            controller.to,
+                            controller.timeTo,
                             DayBased('Once a week', controller.from,
-                                controller.to, 0, false), //금주 or 절주
+                                controller.timeTo, 0, false),
+                            //금주 or 절주
                             controller.isPublic
                                 ? LevelOfAccess.public
                                 : LevelOfAccess.private,
@@ -117,4 +119,15 @@ class _NewPromisePageState extends State<NewPromisePage> {
           ));
     });
   }
+}
+
+void suggestPromise(String friendUid, String pid) async {
+  await Get.find<NewPromisePageController>().suggestPromise(friendUid, pid);
+
+  Fluttertoast.showToast(
+      msg: '추가 요청이 완료되었습니다.',
+      gravity: ToastGravity.CENTER,
+      toastLength: Toast.LENGTH_SHORT,
+      textColor: Colors.black,
+      backgroundColor: Color(0xffF0F0F0));
 }

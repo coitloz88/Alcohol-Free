@@ -22,7 +22,7 @@ class _DataPickerWithHeadingState extends State<DataPickerWithHeading> {
   Widget build(BuildContext context) {
     DateTime date = widget.dayBuffer == 0
         ? Get.find<NewPromisePageController>().from
-        : Get.find<NewPromisePageController>().to;
+        : Get.find<NewPromisePageController>().timeTo;
     return Row(mainAxisSize: MainAxisSize.min, children: [
       Text(widget.heading,
           style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),

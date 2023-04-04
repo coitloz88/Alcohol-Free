@@ -70,6 +70,9 @@ class _AvailableFriendsListItemState extends State<AvailableFriendsListItem> {
               onPressed: isSuggested
                   ? null
                   : () {
+                      NewPromisePageController.to
+                          .updateSelectedFriends(widget.friend);
+                      print(NewPromisePageController.to.selectedFriends);
                       suggestPromise(widget.friend.uid, '');
                       //나중에 여기서는 suggestPromise에서 suggest가 잘 갔을 때 반환받는 플래그를 기준으로 state를 바꿔주는게..
                       setState(() {
@@ -83,7 +86,7 @@ class _AvailableFriendsListItemState extends State<AvailableFriendsListItem> {
   }
 
   void suggestPromise(String friendUid, String pid) async {
-    await Get.find<NewPromisePageController>().suggestPromise(friendUid, pid);
+    // await Get.find<NewPromisePageController>().suggestPromise(friendUid, pid);
 
     Fluttertoast.showToast(
         msg: '추가 요청이 완료되었습니다.',

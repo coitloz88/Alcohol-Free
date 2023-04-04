@@ -1,6 +1,7 @@
 import 'package:alcohol_free/app/data/models/alcohol_free_user_friend.dart';
 import 'package:alcohol_free/app/data/services/friends_service/friends_service.dart';
 import 'package:alcohol_free/app/modules/new_promise/local_widgets/available_friends_list_item.dart';
+import 'package:alcohol_free/app/modules/new_promise/new_promise_page_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -55,6 +56,7 @@ class FriendsListBottomSheet extends StatelessWidget {
 
 class AvailableFriendsList extends StatelessWidget {
   AvailableFriendsList({super.key});
+
   List<AlcoholFreeUserFriend> friends = FriendsService.to.friendList;
 
   @override
