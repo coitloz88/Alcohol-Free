@@ -76,7 +76,7 @@ class DrinkingJournal implements Journal {
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
       'date': date,
-      'icon': icon.toJson(),
+      'icon': icon.iconPath,
       'description': description,
       'why': why,
       'where': where,
